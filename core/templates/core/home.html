@@ -1,0 +1,394 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ============================================================
+     SECCIÓN 1 — HERO
+============================================================ -->
+<section id="inicio" class="hero-section">
+    <img src="{% static 'img/salon-hero.jpg' %}" alt="" class="hero-bg-img" aria-hidden="true">
+    <div class="hero-pattern"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-content">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 col-md-10 col-11">
+                    <div class="hero-badge reveal">Bienvenida a Salón Amanda</div>
+                    <h1 class="hero-title reveal">
+                        Tu belleza,<br><em>nuestra pasión</em>
+                    </h1>
+                    <p class="hero-subtitle reveal">
+                        Salón de belleza premium en Ciudad de los Valles,<br class="d-none d-md-inline">
+                        Av. del Canal 18911, Local 11, Pudahuel
+                    </p>
+                    <div class="hero-buttons reveal">
+                        <a href="#reservar" class="btn btn-hero-primary">Reservar Ahora</a>
+                        <a href="#servicios" class="btn btn-hero-secondary">Ver Servicios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-arrow">
+        <a href="#reservar" aria-label="Ir a reservar">
+            <i class="bi bi-chevron-down"></i>
+        </a>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 2 — RESERVAR
+============================================================ -->
+<section id="reservar" class="booking-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-7 col-md-9 col-11">
+                <div class="section-label reveal">Citas Online</div>
+                <i class="bi bi-calendar3 booking-calendar-icon reveal"></i>
+                <h2 class="section-title reveal">Reserva tu hora en minutos desde donde estés</h2>
+                <p class="section-text reveal">
+                    Agenda tu cita de forma rápida y sencilla a través de AgendaPro.
+                    Elige el servicio, la profesional y el horario que más te acomode — ¡sin llamadas ni esperas!
+                </p>
+                <div class="booking-actions reveal">
+                    <a href="https://link.agendapro.com/cl/salonamanda/9581b2de" class="btn btn-booking-primary" target="_blank" rel="noopener">
+                        <i class="bi bi-calendar-check me-2"></i>Reservar en AgendaPro
+                    </a>
+                    <p class="booking-separator">o escríbenos directamente</p>
+                    <a href="https://wa.me/56939308418?text=Hola%20Sal%C3%B3n%20Amanda%2C%20quiero%20agendar%20una%20cita"
+                       class="btn btn-whatsapp" target="_blank" rel="noopener">
+                        <i class="bi bi-whatsapp me-2"></i>Escribir por WhatsApp
+                    </a>
+                </div>
+                <div class="booking-info reveal">
+                    <span class="booking-info-item">
+                        <i class="bi bi-clock me-1"></i>Lunes a Sábado 10:00 – 20:00
+                    </span>
+                    <span class="booking-info-sep">·</span>
+                    <span class="booking-info-item">
+                        <i class="bi bi-geo-alt me-1"></i>Av. del Canal 18911, Local 11, Pudahuel
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 3 — PROFESIONALES
+============================================================ -->
+<section id="profesionales" class="team-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label reveal">Nuestro Equipo</div>
+            <h2 class="section-title reveal">Profesionales de excelencia</h2>
+            <p class="section-subtitle reveal">
+                Cada integrante de nuestro equipo es experta en su área,<br class="d-none d-md-inline">
+                comprometida con realzar tu belleza natural.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-lg-4 col-md-6 col-10 reveal">
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="{% static 'img/prof-amanda.png' %}"
+                             alt="Amanda Torres — Directora y Colorista Senior" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h4 class="team-name">Amanda Torres</h4>
+                        <div class="team-name-line"></div>
+                        <p class="team-specialty">Directora &amp; Colorista Senior</p>
+                        <p class="team-bio">Especialista en coloración y técnicas avanzadas de color, con años de experiencia en tendencias internacionales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-10 reveal">
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="{% static 'img/prof-valentina.png' %}"
+                             alt="Valentina Rojas — Especialista en Corte y Peinado" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h4 class="team-name">Valentina Rojas</h4>
+                        <div class="team-name-line"></div>
+                        <p class="team-specialty">Especialista en Corte &amp; Peinado</p>
+                        <p class="team-bio">Maestra del corte femenino, con dominio en las últimas tendencias de peinados y estilos contemporáneos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-10 reveal">
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="{% static 'img/prof-camila.png' %}"
+                             alt="Camila Fuentes — Tratamientos y Nail Art" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h4 class="team-name">Camila Fuentes</h4>
+                        <div class="team-name-line"></div>
+                        <p class="team-specialty">Tratamientos &amp; Nail Art</p>
+                        <p class="team-bio">Experta en tratamientos capilares y nail art, recuperando la vitalidad y brillo natural de tu cabello.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 4 — SERVICIOS
+============================================================ -->
+<section id="servicios" class="services-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label reveal">Lo que ofrecemos</div>
+            <h2 class="section-title reveal">Nuestros Servicios</h2>
+            <p class="section-subtitle reveal">Cada servicio es una experiencia diseñada para ti.</p>
+        </div>
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-scissors"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Corte de Pelo</h4>
+                    <p class="service-desc">Corte personalizado según tu tipo de rostro y estilo de vida. Incluye lavado y secado profesional.</p>
+                    <div class="service-price">Desde $15.000</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-palette"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Colorimetría</h4>
+                    <p class="service-desc">Coloración profesional con técnicas de última generación. Análisis de tono de piel incluido.</p>
+                    <div class="service-price">Desde $35.000</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-stars"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Mechas &amp; Highlights</h4>
+                    <p class="service-desc">Balayage, babylights y técnicas de mechas para una iluminación natural y luminosa.</p>
+                    <div class="service-price">Desde $45.000</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-droplet"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Tratamientos Capilares</h4>
+                    <p class="service-desc">Hidratación profunda, keratina y tratamientos nutritivos para restaurar tu cabello.</p>
+                    <div class="service-price">Desde $25.000</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-wind"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Peinados &amp; Brushing</h4>
+                    <p class="service-desc">Peinados para ocasiones especiales, eventos y brushing express para el día a día.</p>
+                    <div class="service-price">Desde $18.000</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-gem"></i></div>
+                    <div class="service-icon-sep"></div>
+                    <h4 class="service-name">Manicure &amp; Nail Art</h4>
+                    <p class="service-desc">Manicure clásico, semipermanente y nail art de autor para complementar tu look.</p>
+                    <div class="service-price">Desde $12.000</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="#reservar" class="btn btn-dark btn-lg px-5 rounded-pill">Agendar un Servicio</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 5 — PRODUCTOS
+============================================================ -->
+<section id="productos" class="products-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label reveal">Tienda</div>
+            <h2 class="section-title reveal">Productos Moroccanoil</h2>
+            <p class="section-subtitle reveal">Lleva a casa lo mejor para tu cabello — productos profesionales originales</p>
+        </div>
+        <div class="row g-4">
+
+            {% for producto in productos_destacados %}
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="product-card">
+                    <a href="{% url 'producto_detail' producto.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
+                        <span class="product-badge">Moroccanoil</span>
+                        <img src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                    </a>
+                    <div class="product-info">
+                        <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">
+                            <h5 class="product-name">{{ producto.nombre }}</h5>
+                        </a>
+                        {% if producto.precio_clp %}
+                        <p class="product-price">${{ producto.precio_clp }}</p>
+                        {% endif %}
+                        {% with wa_txt="Hola Salón Amanda, me interesa el producto: "|add:producto.nombre|add:". Más info: "|add:request.scheme|add:"://"|add:request.get_host|add:producto.get_absolute_url %}
+                        <a href="https://wa.me/56939308418?text={{ wa_txt|urlencode }}" class="btn btn-consultar" target="_blank" rel="noopener">
+                            <i class="bi bi-whatsapp me-1"></i>Pedir por WhatsApp
+                        </a>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="{% url 'catalogo' %}" class="btn btn-ver-catalogo">
+                Ver todos los productos <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 6 — GALERÍA
+============================================================ -->
+<section id="galeria" class="gallery-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label reveal">Nuestro Espacio</div>
+            <h2 class="section-title reveal">Conoce el Salón</h2>
+            <p class="section-subtitle reveal">Un ambiente moderno y acogedor, pensado para tu comodidad y bienestar.</p>
+        </div>
+        <div class="gallery-grid reveal">
+            <div class="gallery-item gallery-item--featured">
+                <img src="{% static 'img/salon-recepcion.jpg' %}"
+                     alt="Recepción y sala de espera de Salón Amanda" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-peluqueria-1.jpg' %}"
+                     alt="Estaciones de peluquería con espejos LED" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-peluqueria-2.jpg' %}"
+                     alt="Estaciones de peluquería" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-maquillaje.jpg' %}"
+                     alt="Estación de maquillaje y peinado" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-estetica.jpg' %}"
+                     alt="Sala de tratamientos y estética" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-peluqueria-3.jpg' %}"
+                     alt="Estación de peinado con iluminación" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-recepcion-2.jpg' %}"
+                     alt="Recepción y vitrina de productos" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-manicure.jpg' %}"
+                     alt="Estación de manicure" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'img/salon-pedicure.jpg' %}"
+                     alt="Spa de pedicure" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay"><i class="bi bi-eye"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     SECCIÓN 7 — NOSOTROS
+============================================================ -->
+<section id="nosotros" class="about-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-7 reveal">
+                <div class="section-label">NUESTRA HISTORIA</div>
+                <h2 class="section-title">Belleza que transforma</h2>
+                <p class="about-text">
+                    Salón Amanda nació con una misión simple pero poderosa: hacer que cada mujer
+                    que cruce nuestra puerta se sienta más bella, segura y radiante. Creemos que
+                    la belleza es una experiencia, no sólo un resultado.
+                </p>
+                <p class="about-text">
+                    Ubicados en Ciudad de los Valles, Pudahuel (Av. del Canal 18911, Local 11),
+                    somos más que un salón de belleza: somos un espacio de cuidado personal,
+                    bienestar y renovación femenina.
+                </p>
+                <div class="about-stats">
+                    <div class="about-stat-item">
+                        <i class="bi bi-geo-alt-fill about-stat-icon"></i>
+                        <span>Av. del Canal 18911, Local 11, Pudahuel</span>
+                    </div>
+                    <div class="about-stat-item">
+                        <i class="bi bi-clock-fill about-stat-icon"></i>
+                        <span>Lunes a Sábado, 10:00–20:00 hrs</span>
+                    </div>
+                    <div class="about-stat-item">
+                        <i class="bi bi-whatsapp about-stat-icon" style="color:#25D366;"></i>
+                        <span>+56 9 5846 9232</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/56939308418" class="btn btn-outline-dark rounded-pill px-4 mt-4" target="_blank" rel="noopener">
+                    Contáctanos
+                </a>
+            </div>
+
+            <div class="col-lg-5 reveal">
+                <div class="about-image-wrapper">
+                    <img src="{% static 'img/salon-nosotros.jpg' %}"
+                         alt="Interior del Salón Amanda en Ciudad de los Valles" class="about-img" loading="lazy">
+                </div>
+                <div class="map-wrapper mt-4">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Av+del+Canal+18911%2C+Ciudad+de+los+Valles%2C+Pudahuel%2C+Chile&output=embed&hl=es-419"
+                        width="100%"
+                        height="240"
+                        style="border:0; border-radius: 12px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación Salón Amanda — Av. del Canal 18911, Local 11, Ciudad de los Valles, Pudahuel">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

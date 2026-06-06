@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Productos Moroccanoil — Salón Amanda{% endblock %}
+
+{% block content %}
+<section class="catalogo-section">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <div class="section-label">Tienda</div>
+            <h1 class="section-title">Productos Moroccanoil</h1>
+            <p class="section-subtitle">Catálogo profesional original · Consulta y pide por WhatsApp</p>
+        </div>
+
+        <form method="get" class="catalogo-search mb-4" role="search">
+            <div class="input-group">
+                <input type="text" name="q" value="{{ q }}" class="form-control"
+                       placeholder="Buscar producto (ej: tratamiento, shampoo, mascarilla)...">
+                <button class="btn btn-search" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+            {% if q %}
+            <p class="catalogo-result-info">{{ total }} resultado{{ total|pluralize }} para "{{ q }}" ·
+                <a href="{% url 'catalogo' %}">limpiar</a></p>
+            {% endif %}
+        </form>
+
+        <div class="row g-4">
+            {% for producto in productos %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <a href="{% url 'producto_detail' producto.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
+                        <span class="product-badge">Moroccanoil</span>
+                        <img src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                    </a>
+                    <div class="product-info">
+                        <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">
+                            <h5 class="product-name">{{ producto.nombre }}</h5>
+                        </a>
+                        {% if producto.precio_clp %}
+                        <p class="product-price">${{ producto.precio_clp }}</p>
+                        {% endif %}
+                        {% with wa_txt="Hola Salón Amanda, me interesa el producto: "|add:producto.nombre|add:". Más info: "|add:request.scheme|add:"://"|add:request.get_host|add:producto.get_absolute_url %}
+                        <a href="https://wa.me/56939308418?text={{ wa_txt|urlencode }}" class="btn btn-consultar" target="_blank" rel="noopener">
+                            <i class="bi bi-whatsapp me-1"></i>Pedir por WhatsApp
+                        </a>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="text-muted">No se encontraron productos.</p>
+                <a href="{% url 'catalogo' %}" class="btn btn-ver-catalogo">Ver todo el catálogo</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if productos.paginator.num_pages > 1 %}
+        <nav class="catalogo-pagination mt-5" aria-label="Paginación de productos">
+            <ul class="pagination justify-content-center">
+                {% if productos.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ productos.previous_page_number }}{% if q %}&q={{ q }}{% endif %}">‹</a></li>
+                {% endif %}
+                {% for num in productos.paginator.page_range %}
+                    {% if num == productos.number %}
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% elif num > productos.number|add:'-3' and num < productos.number|add:'3' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if q %}&q={{ q }}{% endif %}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if productos.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ productos.next_page_number }}{% if q %}&q={{ q }}{% endif %}">›</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

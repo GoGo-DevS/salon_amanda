@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\diego\\\\Documents\\\\gogocrm\\\\salon_amanda\" -Recurse -Depth 2)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\diego\\\\Documents\\\\gogocrm\\\\salon_amanda\" -Recurse -Depth 3 | Where-Object { !$_.PSIsContainer } | Select-Object -ExpandProperty FullName)",
+      "Read(//c/Users/diego/Documents/gogocrm/**)",
+      "Read(//c/Users/diego/Documents/**)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\diego\\\\Documents\\\\gogocrm\\\\sindicatoAza\" -Recurse -Depth 3 | Where-Object { !$_.PSIsContainer } | Select-Object -ExpandProperty FullName)",
+      "Bash(Get-Content _update_siteconfig.py)",
+      "Bash(python manage.py shell)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\diego\\Documents\\gogocrm"
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ producto.nombre }} — Salón Amanda{% endblock %}
+
+{% block extra_head %}
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ producto.nombre }} — Salón Amanda">
+    <meta property="og:description" content="{% if producto.precio_clp %}${{ producto.precio_clp }} · {% endif %}{{ producto.descripcion_corta|default:'Producto Moroccanoil disponible en Salón Amanda. Pídelo por WhatsApp.' }}">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static producto.imagen_principal %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block content %}
+<section class="producto-detail-section">
+    <div class="container">
+
+        <nav class="producto-breadcrumb" aria-label="breadcrumb">
+            <a href="{% url 'home' %}">Inicio</a>
+            <span>/</span>
+            <a href="{% url 'catalogo' %}">Productos</a>
+            <span>/</span>
+            <span class="current">{{ producto.nombre }}</span>
+        </nav>
+
+        <div class="row g-5 align-items-start">
+
+            <!-- Galería -->
+            <div class="col-lg-6">
+                <div class="producto-gallery">
+                    <div class="producto-gallery-main">
+                        <img id="mainImage" src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}">
+                    </div>
+                    {% if producto.imagenes.count > 1 %}
+                    <div class="producto-gallery-thumbs">
+                        {% for img in producto.imagenes.all %}
+                        <button type="button" class="producto-thumb {% if forloop.first %}active{% endif %}"
+                                onclick="cambiarImagen(this, '{% static img.imagen %}')">
+                            <img src="{% static img.imagen %}" alt="{{ producto.nombre }} {{ forloop.counter }}" loading="lazy">
+                        </button>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="col-lg-6">
+                <div class="producto-info-detail">
+                    <span class="product-badge mb-2 d-inline-block">Moroccanoil</span>
+                    <h1 class="producto-title">{{ producto.nombre }}</h1>
+
+                    {% if producto.precio_clp %}
+                    <p class="producto-precio">${{ producto.precio_clp }}</p>
+                    {% endif %}
+
+                    {% if producto.descripcion_corta %}
+                    <p class="producto-desc-corta">{{ producto.descripcion_corta }}</p>
+                    {% endif %}
+
+                    {% with wa_txt="Hola Salón Amanda, me interesa el producto: "|add:producto.nombre|add:". Más info: "|add:request.build_absolute_uri %}
+                    <a href="https://wa.me/56939308418?text={{ wa_txt|urlencode }}"
+                       class="btn btn-consultar btn-lg w-100 mb-3" target="_blank" rel="noopener">
+                        <i class="bi bi-whatsapp me-2"></i>Pedir por WhatsApp
+                    </a>
+                    {% endwith %}
+                    <p class="producto-nota"><i class="bi bi-info-circle me-1"></i>Consulta disponibilidad y coordina tu compra directamente con nosotras.</p>
+
+                    {% if producto.descripcion %}
+                    <div class="producto-descripcion-full">
+                        <h3>Descripción</h3>
+                        <p>{{ producto.descripcion }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Relacionados -->
+        {% if relacionados %}
+        <div class="producto-relacionados mt-5 pt-5">
+            <h2 class="section-title text-center mb-4">También te puede gustar</h2>
+            <div class="row g-4">
+                {% for rel in relacionados %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <a href="{% url 'producto_detail' rel.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
+                            <img src="{% static rel.imagen_principal %}" alt="{{ rel.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                        </a>
+                        <div class="product-info">
+                            <a href="{% url 'producto_detail' rel.slug %}" style="text-decoration:none;color:inherit;">
+                                <h5 class="product-name">{{ rel.nombre }}</h5>
+                            </a>
+                            {% if rel.precio_clp %}<p class="product-price">${{ rel.precio_clp }}</p>{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<script>
+function cambiarImagen(boton, src) {
+    document.getElementById('mainImage').src = src;
+    document.querySelectorAll('.producto-thumb').forEach(function(t){ t.classList.remove('active'); });
+    boton.classList.add('active');
+}
+</script>
+{% endblock %}

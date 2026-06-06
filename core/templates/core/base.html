@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Salón Amanda — Belleza Premium en Ciudad de los Valles{% endblock %}</title>
+    <meta name="description" content="Salón de belleza premium en Ciudad de los Valles, Pudahuel. Av. del Canal 18911, Local 11. Colorimetría, cortes, tratamientos y más. Reserva tu hora online.">
+    <meta name="keywords" content="salón de belleza, Ciudad de los Valles, Pudahuel, CDValles, colorimetría, corte de pelo, tratamientos capilares, nail art, mechas, Av del Canal, Amanda Torres">
+    <meta name="theme-color" content="#00BFC8">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Salón Amanda — Belleza Premium en Ciudad de los Valles">
+    <meta property="og:description" content="Salón de belleza premium en Ciudad de los Valles, Pudahuel. Av. del Canal 18911, Local 11. Colorimetría, cortes, tratamientos y más. Reserva tu hora online.">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="Salón Amanda">
+
+    <!-- Favicon -->
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'img/isotipo-amanda.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/isotipo-amanda.png' %}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}#inicio" style="text-decoration:none;">
+            <img src="{% static 'img/isotipo-amanda.png' %}" alt="Salón Amanda" style="height:52px;width:auto;display:block;">
+            <img src="{% static 'img/LETRASINFONDO.png' %}" alt="Salón Amanda SPA" style="height:52px;width:auto;display:block;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Abrir menú">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#inicio">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#reservar">Reservar</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#profesionales">Profesionales</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#servicios">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'catalogo' %}">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#galeria">Galería</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#nosotros">Nosotros</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-dark navbar-cta" href="{% url 'home' %}#reservar">Reservar Ahora</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== CONTENIDO PRINCIPAL ===== -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer-main">
+    <div class="container">
+        <div class="row gy-5">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-brand">Salón Amanda</div>
+                <p class="footer-tagline">Tu belleza, nuestra pasión</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/salonamanda.cl/" class="social-link" aria-label="Instagram de Salón Amanda" target="_blank" rel="noopener">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/56939308418" class="social-link" aria-label="WhatsApp de Salón Amanda" target="_blank" rel="noopener">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-heading">Navegación</h6>
+                <ul class="footer-links">
+                    <li><a href="{% url 'home' %}#inicio">Inicio</a></li>
+                    <li><a href="{% url 'home' %}#reservar">Reservar</a></li>
+                    <li><a href="{% url 'home' %}#profesionales">Profesionales</a></li>
+                    <li><a href="{% url 'home' %}#servicios">Servicios</a></li>
+                    <li><a href="{% url 'catalogo' %}">Productos</a></li>
+                    <li><a href="{% url 'home' %}#galeria">Galería</a></li>
+                    <li><a href="{% url 'home' %}#nosotros">Nosotros</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-heading">Servicios</h6>
+                <ul class="footer-links">
+                    <li><a href="#servicios">Corte de Pelo</a></li>
+                    <li><a href="#servicios">Colorimetría</a></li>
+                    <li><a href="#servicios">Mechas &amp; Highlights</a></li>
+                    <li><a href="#servicios">Tratamientos Capilares</a></li>
+                    <li><a href="#servicios">Peinados &amp; Brushing</a></li>
+                    <li><a href="#servicios">Manicure &amp; Nail Art</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-heading">Contacto</h6>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Av. del Canal 18911, Local 11, Ciudad de los Valles, Pudahuel</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone"></i>
+                        <span>+56 9 3930 8418</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-clock"></i>
+                        <span>Lunes a Sábado, 10:00 – 20:00 hrs</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <p>© 2025 Salón Amanda · Desarrollado con ♥ por <a href="https://gogodevs.cl" target="_blank" rel="noopener">GoGoDevS</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== INSTAGRAM FLOTANTE ===== -->
+<a href="https://www.instagram.com/salonamanda.cl/"
+   class="instagram-float" target="_blank" rel="noopener" aria-label="Instagram de Salón Amanda">
+    <i class="bi bi-instagram"></i>
+    <span class="instagram-tooltip">Síguenos</span>
+</a>
+
+<!-- ===== WHATSAPP FLOTANTE ===== -->
+<a href="https://wa.me/56939308418?text=Hola%20Sal%C3%B3n%20Amanda%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20sus%20servicios"
+   class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+    <span class="whatsapp-tooltip">¡Escríbenos!</span>
+</a>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'js/main.js' %}"></script>
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>
