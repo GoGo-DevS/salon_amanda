@@ -793,6 +793,56 @@ section { padding: 6rem 0; }
 
 
 /* ============================================================
+   SHOWCASE — Trabajos Realizados & Eventos
+============================================================ */
+.showcase-section {
+    background-color: var(--color-white);
+}
+.showcase-section--alt {
+    background-color: var(--color-bg);
+}
+.showcase-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    border: 1.5px dashed rgba(0, 191, 200, 0.35);
+    background: linear-gradient(160deg, var(--color-teal-light) 0%, var(--color-white) 100%);
+    color: var(--color-teal);
+    text-align: center;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.showcase-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 191, 200, 0.15);
+}
+.showcase-tile i {
+    font-size: 2.4rem;
+}
+.showcase-tile span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-black);
+    letter-spacing: 0.02em;
+}
+.showcase-note {
+    text-align: center;
+    margin-top: 2.5rem;
+    color: var(--color-gray);
+    font-size: 0.95rem;
+}
+.showcase-note a {
+    color: var(--color-teal);
+    font-weight: 600;
+    text-decoration: none;
+}
+.showcase-note a:hover { text-decoration: underline; }
+
+/* ============================================================
    NOSOTROS
 ============================================================ */
 .about-section {
