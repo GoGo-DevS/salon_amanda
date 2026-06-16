@@ -1565,5 +1565,155 @@
     "imagenes": [
       "img/productos/tratamiento-moroccanoil-light-200ml-1.jpg"
     ]
+  },
+  {
+    "id": 1001,
+    "sku": "OSIS-VELVET200",
+    "nombre": "Schwarzkopf Osis+ Velvet Spray Fijacion Ligera Acabado Satinado 200ml",
+    "slug": "osis-velvet-spray-200ml",
+    "precio": 26890,
+    "precio_regular": 26890,
+    "precio_oferta": 26890,
+    "descripcion_corta": "Spray de fijacion ligera con acabado satinado. Ideal para estilos naturales sin rigidez.",
+    "descripcion": "Osis+ Velvet de Schwarzkopf Professional ofrece fijacion ligera con acabado satinado suave. Perfecto para estilos sueltos y naturales que necesitan control sin peso ni rigidez.",
+    "url_origen": "https://meli.la/142AWxE",
+    "imagenes": [
+      "img/productos/osis/osis-velvet-spray-200ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1002,
+    "sku": "OSIS-CURLJAM300",
+    "nombre": "Schwarzkopf Osis+ Curl Jam Gel Definidor Rizos Control Duradero 300ml",
+    "slug": "osis-curl-jam-gel-300ml",
+    "precio": 25890,
+    "precio_regular": 25890,
+    "precio_oferta": 25890,
+    "descripcion_corta": "Gel definidor de rizos con control duradero. Sin efecto carton, para rizos naturales definidos.",
+    "descripcion": "Osis+ Curl Jam define y controla los rizos durante todo el dia sin endurecerlos. Resultado: rizos suaves, definidos y libres de frizz.",
+    "url_origen": "https://meli.la/26kAX8M",
+    "imagenes": [
+      "img/productos/osis/osis-curl-jam-gel-300ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1003,
+    "sku": "OSIS-REFRESHDUST300",
+    "nombre": "Schwarzkopf Osis+ Refresh Dust Shampoo En Seco 300ml",
+    "slug": "osis-refresh-dust-shampoo-seco-300ml",
+    "precio": 24100,
+    "precio_regular": 24100,
+    "precio_oferta": 24100,
+    "descripcion_corta": "Shampoo en seco que refresca el cuero cabelludo y aporta volumen instantaneo entre lavados.",
+    "descripcion": "Osis+ Refresh Dust refresca el cabello entre lavados, absorbe la grasa y agrega volumen y textura al instante.",
+    "url_origen": "https://meli.la/2ky7GnR",
+    "imagenes": [
+      "img/productos/osis/osis-refresh-dust-shampoo-seco-300ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1004,
+    "sku": "OSIS-FLATLINER200",
+    "nombre": "Schwarzkopf Osis+ Flatliner Spray Termoprotector 200ml",
+    "slug": "osis-flatliner-termoprotector-200ml",
+    "precio": 21490,
+    "precio_regular": 21490,
+    "precio_oferta": 21490,
+    "descripcion_corta": "Spray termoprotector que protege el cabello del calor de planchas y secadores hasta 230 grados.",
+    "descripcion": "Osis+ Flatliner protege el cabello del dano del calor hasta 230 grados. Ideal antes de usar plancha, tenaza o secador.",
+    "url_origen": "https://meli.la/1HBaT33",
+    "imagenes": [
+      "img/productos/osis/osis-flatliner-termoprotector-200ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1005,
+    "sku": "OSIS-SUPERSHIELD300",
+    "nombre": "Schwarzkopf Osis+ Super Shield Spray Protector Termico Antifrizz 300ml",
+    "slug": "osis-super-shield-protector-300ml",
+    "precio": 24946,
+    "precio_regular": 24946,
+    "precio_oferta": 24946,
+    "descripcion_corta": "Spray protector termico antifrizz para cabello liso y brillante con proteccion hasta 230 grados.",
+    "descripcion": "Osis+ Super Shield combina proteccion termica y control del frizz en un solo producto. Aporta brillo, suavidad y proteccion contra el calor.",
+    "url_origen": "https://meli.la/1qCHwsD",
+    "imagenes": [
+      "img/productos/osis/osis-super-shield-protector-300ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1006,
+    "sku": "OSIS-SPARKLER300",
+    "nombre": "Schwarzkopf Osis+ Sparkler Spray de Brillo Acondiciona y Desenreda 300ml",
+    "slug": "osis-sparkler-spray-brillo-300ml",
+    "precio": 25990,
+    "precio_regular": 25990,
+    "precio_oferta": 25990,
+    "descripcion_corta": "Spray de brillo que acondiciona, desenreda y aporta luminosidad al cabello sin apelmazar.",
+    "descripcion": "Osis+ Sparkler acondiciona, desenreda y anade un brillo intenso y natural al cabello. Formula ligera sin residuos.",
+    "url_origen": "https://meli.la/2PM3MBm",
+    "imagenes": [
+      "img/productos/osis/osis-sparkler-spray-brillo-300ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1007,
+    "sku": "OSIS-GLOW50",
+    "nombre": "Schwarzkopf Osis+ Glow Serum Anti Frizz y Definicion Profesional 50ml",
+    "slug": "osis-glow-serum-antifrizz-50ml",
+    "precio": 24432,
+    "precio_regular": 24432,
+    "precio_oferta": 24432,
+    "descripcion_corta": "Serum profesional que elimina el frizz y define el cabello con un acabado brillante y sedoso.",
+    "descripcion": "Osis+ Glow controla el frizz, define el cabello y aporta un brillo espejo intenso. Perfecto para acabados lisos y ondas definidas.",
+    "url_origen": "https://meli.la/2MnBfUc",
+    "imagenes": [
+      "img/productos/osis/osis-glow-serum-antifrizz-50ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1008,
+    "sku": "OSIS-BOUNTYBALM150",
+    "nombre": "Schwarzkopf Osis+ Bounty Balm Crema Para Rizos 150ml",
+    "slug": "osis-bounty-balm-crema-rizos-150ml",
+    "precio": 13290,
+    "precio_regular": 13290,
+    "precio_oferta": 13290,
+    "descripcion_corta": "Crema nutritiva para rizos que hidrata en profundidad y define con resultado suave y natural.",
+    "descripcion": "Osis+ Bounty Balm hidrata intensamente, define los rizos y combate el encrespamiento dejando un acabado suave y natural.",
+    "url_origen": "https://meli.la/2F5wAUn",
+    "imagenes": [
+      "img/productos/osis/osis-bounty-balm-crema-rizos-150ml-1.jpg"
+    ]
+  },
+  {
+    "id": 1009,
+    "sku": "OSIS-DUSTIT",
+    "nombre": "Schwarzkopf Osis+ Dust It Polvo Texturizante Volumen Matificante",
+    "slug": "osis-dust-it-polvo-texturizante",
+    "precio": 19980,
+    "precio_regular": 19980,
+    "precio_oferta": 19980,
+    "descripcion_corta": "Polvo texturizante que anade volumen, cuerpo y textura mate al cabello fino y sin vida.",
+    "descripcion": "Osis+ Dust It agrega volumen, cuerpo y textura mate instantaneos con solo aplicar una pequena cantidad. Perfecto para el cabello fino.",
+    "url_origen": "https://meli.la/2ZD55yQ",
+    "imagenes": [
+      "img/productos/osis/osis-dust-it-polvo-texturizante-1.jpg"
+    ]
+  },
+  {
+    "id": 1010,
+    "sku": "OSIS-SOFTTEXTURE",
+    "nombre": "Schwarzkopf Osis+ Soft Texture Acondicionador Seco",
+    "slug": "osis-soft-texture-acondicionador-seco",
+    "precio": 33324,
+    "precio_regular": 33324,
+    "precio_oferta": 33324,
+    "descripcion_corta": "Acondicionador seco que aporta suavidad, textura y movimiento al cabello sin necesidad de enjuague.",
+    "descripcion": "Osis+ Soft Texture suaviza y texturiza el cabello en segundos. Sin enjuague, aporta hidratacion, suavidad y movimiento natural al instante.",
+    "url_origen": "https://meli.la/2dkKM34",
+    "imagenes": [
+      "img/productos/osis/osis-soft-texture-acondicionador-seco-1.jpg"
+    ]
   }
 ]

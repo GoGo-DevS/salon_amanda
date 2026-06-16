@@ -30,6 +30,21 @@ class Producto(models.Model):
         return reverse('producto_detail', args=[self.slug])
 
     @property
+    def marca(self):
+        if self.sku.startswith("OSIS"):
+            return "Schwarzkopf"
+        return "Moroccanoil"
+
+    @property
+    def imagen_url(self):
+        if not self.imagen_principal:
+            return ""
+        if self.imagen_principal.startswith("http"):
+            return self.imagen_principal
+        from django.templatetags.static import static
+        return static(self.imagen_principal)
+
+    @property
     def precio_clp(self):
         """Precio formateado estilo chileno: 43.990"""
         if not self.precio:

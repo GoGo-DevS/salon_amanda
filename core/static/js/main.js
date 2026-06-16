@@ -105,7 +105,7 @@ document.querySelectorAll('a[href*="#"]').forEach(anchor => {
         e.preventDefault();
         const offsetTop = target.getBoundingClientRect().top + window.scrollY - 68;
         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-        history.replaceState(null, '', hash);
+        history.replaceState(null, '', window.location.pathname + window.location.search);
     });
 });
 

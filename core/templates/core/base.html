@@ -169,5 +169,42 @@
 <script src="{% static 'js/main.js' %}"></script>
 
 {% block extra_scripts %}{% endblock %}
+
+<script>
+function _scrollTo(target) {
+    var navH = (document.querySelector('.navbar') || {}).offsetHeight || 0;
+    var top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+// Interceptar click en capture phase (antes que Bootstrap)
+document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href*="#"]');
+    if (!a) return;
+    var hashIdx = a.getAttribute('href').indexOf('#');
+    if (hashIdx === -1) return;
+    var hash = a.getAttribute('href').slice(hashIdx + 1);
+    if (!hash) return;
+    var target = document.getElementById(hash);
+    if (!target) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    _scrollTo(target);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    var nav = document.getElementById('navbarNav');
+    if (nav && nav.classList.contains('show')) {
+        var inst = bootstrap.Collapse.getInstance(nav);
+        if (inst) inst.hide();
+    }
+}, { capture: true });
+
+// Fallback: si el hash se coló igual, limpiarlo de inmediato
+window.addEventListener('hashchange', function() {
+    var hash = window.location.hash.slice(1);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    var target = document.getElementById(hash);
+    if (target) _scrollTo(target);
+});
+</script>
 </body>
 </html>

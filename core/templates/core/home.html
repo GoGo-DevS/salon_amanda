@@ -147,83 +147,225 @@
 ============================================================ -->
 <section id="servicios" class="services-section">
     <div class="container">
-        <div class="text-center mb-5">
+        <div class="text-center mb-4">
             <div class="section-label reveal">Lo que ofrecemos</div>
             <h2 class="section-title reveal">Nuestros Servicios</h2>
-            <p class="section-subtitle reveal">Cada servicio es una experiencia diseñada para ti.</p>
+            <p class="section-subtitle reveal">Precios desde — valor final lo confirma tu estilista en evaluación presencial.</p>
         </div>
-        <div class="row g-4">
 
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-scissors"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Corte de Pelo</h4>
-                    <p class="service-desc">Corte personalizado según tu tipo de rostro y estilo de vida. Incluye lavado y secado profesional.</p>
-                    <div class="service-price">Desde $15.000</div>
+        <!-- Filtros categoría -->
+        <ul class="nav nav-pills justify-content-center mb-5 servicios-tabs reveal" id="serviciosTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-cabello" type="button" role="tab">
+                    <i class="bi bi-scissors me-1"></i>Cabello
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-unas" type="button" role="tab">
+                    <i class="bi bi-gem me-1"></i>Uñas
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-estetica" type="button" role="tab">
+                    <i class="bi bi-stars me-1"></i>Estética
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="serviciosTabsContent">
+
+            <!-- ===== CABELLO ===== -->
+            <div class="tab-pane fade show active" id="tab-cabello" role="tabpanel">
+                <div class="row g-4">
+
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-scissors"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Cortes</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Corte de Flequillo</span><span class="svc-precio">$7.000</span></li>
+                                <li><span class="svc-nombre">Corte de puntas + Brushing</span><span class="svc-precio">$16.000</span></li>
+                                <li><span class="svc-nombre">Corte mujer + Brushing</span><span class="svc-precio">$24.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $7.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-wind"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Lavado &amp; Brushing</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Brushing S-M</span><span class="svc-precio">$14.000</span></li>
+                                <li><span class="svc-nombre">Brushing L</span><span class="svc-precio">$16.000</span></li>
+                                <li><span class="svc-nombre">+ Ondas S-M / L-XL</span><span class="svc-precio">$19–22.000</span></li>
+                                <li><span class="svc-nombre">+ Planchado S-M / L-XL</span><span class="svc-precio">$19–22.000</span></li>
+                                <li><span class="svc-nombre">Peinado</span><span class="svc-precio">desde $20.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $14.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-droplet"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Tratamientos</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Masaje Moroccanoil + Brushing</span><span class="svc-precio">$30.000</span></li>
+                                <li><span class="svc-nombre">Masaje Moroccanoil + Corte</span><span class="svc-precio">$45.000</span></li>
+                                <li><span class="svc-nombre">Alisado Termoactivo</span><span class="svc-precio">desde $50.000</span></li>
+                                <li><span class="svc-nombre">Ondulación Permanente</span><span class="svc-precio">$50.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $30.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-palette"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Coloración</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Coloración permanente</span><span class="svc-precio">desde $45.000</span></li>
+                                <li><span class="svc-nombre">Coloración permanente + baño color</span><span class="svc-precio">desde $65.000</span></li>
+                                <li><span class="svc-nombre">Coloración demipermanente</span><span class="svc-precio">desde $50.000</span></li>
+                                <li><span class="svc-nombre">Coloración demi + baño color</span><span class="svc-precio">desde $70.000</span></li>
+                                <li><span class="svc-nombre">Coloración permanente barba</span><span class="svc-precio">$10.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $10.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-stars"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Mechas &amp; Decoloración</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Evaluación mecha</span><span class="svc-precio">$10.000</span></li>
+                                <li><span class="svc-nombre">Decoloración balayage / babylights</span><span class="svc-precio">desde $75.000</span></li>
+                                <li><span class="svc-nombre">Decoloración global</span><span class="svc-precio">desde $80.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $10.000</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-palette"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Colorimetría</h4>
-                    <p class="service-desc">Coloración profesional con técnicas de última generación. Análisis de tono de piel incluido.</p>
-                    <div class="service-price">Desde $35.000</div>
+            <!-- ===== UÑAS ===== -->
+            <div class="tab-pane fade" id="tab-unas" role="tabpanel">
+                <div class="row g-4">
+
+                    <div class="col-lg-3 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-gem"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Manicure</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Simple (sin esmaltado)</span><span class="svc-precio">$6.000</span></li>
+                                <li><span class="svc-nombre">Rusa 1 tono</span><span class="svc-precio">$25.000</span></li>
+                                <li><span class="svc-nombre">Rusa full</span><span class="svc-precio">$28.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $6.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-brush"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Esmaltado Permanente</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Retiro esmaltado</span><span class="svc-precio">$4.000</span></li>
+                                <li><span class="svc-nombre">Liso 1 o 2 tonos</span><span class="svc-precio">$17.000</span></li>
+                                <li><span class="svc-nombre">Francesa / degradé / diseño</span><span class="svc-precio">$20.000</span></li>
+                                <li><span class="svc-nombre">Liso + retiro incluido</span><span class="svc-precio">$21.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $4.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-magic"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Extensiones</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Reparación uña quebrada</span><span class="svc-precio">$3.000</span></li>
+                                <li><span class="svc-nombre">Retiro soft gel / acrílico</span><span class="svc-precio">$10.000</span></li>
+                                <li><span class="svc-nombre">Extensión soft gel</span><span class="svc-precio">$39.000</span></li>
+                                <li><span class="svc-nombre">Extensión acrílico</span><span class="svc-precio">$45.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $3.000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-droplet-half"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Pedicure</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Pedicure Express</span><span class="svc-precio">$15.000</span></li>
+                                <li><span class="svc-nombre">Pedicura Spa</span><span class="svc-precio">$20.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $15.000</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-stars"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Mechas &amp; Highlights</h4>
-                    <p class="service-desc">Balayage, babylights y técnicas de mechas para una iluminación natural y luminosa.</p>
-                    <div class="service-price">Desde $45.000</div>
+            <!-- ===== ESTÉTICA ===== -->
+            <div class="tab-pane fade" id="tab-estetica" role="tabpanel">
+                <div class="row g-4 justify-content-center">
+
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-eye"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Cejas &amp; Depilación</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Perfilado cejas con pinzas</span><span class="svc-precio">$5.000</span></li>
+                                <li><span class="svc-nombre">Depilación facial con cera (1 zona)</span><span class="svc-precio">$3.500</span></li>
+                            </ul>
+                            <div class="service-price">Desde $3.500</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="bi bi-palette2"></i></div>
+                            <div class="service-icon-sep"></div>
+                            <h4 class="service-name">Maquillaje</h4>
+                            <ul class="service-items-list">
+                                <li><span class="svc-nombre">Maquillaje Social</span><span class="svc-precio">desde $25.000</span></li>
+                            </ul>
+                            <div class="service-price">Desde $25.000</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-droplet"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Tratamientos Capilares</h4>
-                    <p class="service-desc">Hidratación profunda, keratina y tratamientos nutritivos para restaurar tu cabello.</p>
-                    <div class="service-price">Desde $25.000</div>
-                </div>
-            </div>
+        </div><!-- /tab-content -->
 
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-wind"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Peinados &amp; Brushing</h4>
-                    <p class="service-desc">Peinados para ocasiones especiales, eventos y brushing express para el día a día.</p>
-                    <div class="service-price">Desde $18.000</div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 reveal">
-                <div class="service-card">
-                    <div class="service-icon"><i class="bi bi-gem"></i></div>
-                    <div class="service-icon-sep"></div>
-                    <h4 class="service-name">Manicure &amp; Nail Art</h4>
-                    <p class="service-desc">Manicure clásico, semipermanente y nail art de autor para complementar tu look.</p>
-                    <div class="service-price">Desde $12.000</div>
-                </div>
-            </div>
-
-        </div>
         <div class="text-center mt-5 reveal">
-            <a href="#reservar" class="btn btn-dark btn-lg px-5 rounded-pill">Agendar un Servicio</a>
+            <a href="https://link.agendapro.com/cl/salonamanda/9581b2de"
+               class="btn btn-dark btn-lg px-5 rounded-pill" target="_blank" rel="noopener">
+                <i class="bi bi-calendar-check me-2"></i>Agendar un Servicio
+            </a>
         </div>
     </div>
 </section>
 
 
 <!-- ============================================================
-     SECCIÓN 5 — PRODUCTOS
+     SECCIÓN 5 — PRODUCTOS MOROCCANOIL
 ============================================================ -->
 <section id="productos" class="products-section">
     <div class="container">
@@ -239,7 +381,7 @@
                 <div class="product-card">
                     <a href="{% url 'producto_detail' producto.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
                         <span class="product-badge">Moroccanoil</span>
-                        <img src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="product-img-placeholder" loading="lazy">
                     </a>
                     <div class="product-info">
                         <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">
@@ -266,6 +408,52 @@
         </div>
     </div>
 </section>
+
+
+<!-- ============================================================
+     SECCIÓN 5B — PRODUCTOS SCHWARZKOPF OSIS
+============================================================ -->
+{% if osis_productos %}
+<section id="productos-osis" class="products-section" style="background:#f8f8f8;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-label reveal">Centro Técnico Oficial</div>
+            <h2 class="section-title reveal">Schwarzkopf Professional</h2>
+            <p class="section-subtitle reveal">Línea Osis+ disponible en el salón — productos de styling profesional</p>
+        </div>
+        <div class="row g-4">
+
+            {% for producto in osis_productos %}
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="product-card">
+                    <a href="{% url 'producto_detail' producto.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
+                        <span class="product-badge" style="background:#111;">Schwarzkopf</span>
+                        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="product-img-placeholder" loading="lazy">
+                    </a>
+                    <div class="product-info">
+                        <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">
+                            <h5 class="product-name">{{ producto.nombre }}</h5>
+                        </a>
+                        <p class="product-price" style="color:#555;font-size:.85rem;">Consultar precio</p>
+                        {% with wa_txt="Hola Salón Amanda, me interesa el producto Schwarzkopf: "|add:producto.nombre %}
+                        <a href="https://wa.me/56939308418?text={{ wa_txt|urlencode }}" class="btn btn-consultar" target="_blank" rel="noopener">
+                            <i class="bi bi-whatsapp me-1"></i>Pedir por WhatsApp
+                        </a>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a href="{% url 'catalogo' %}?q=schwarzkopf" class="btn btn-ver-catalogo">
+                Ver todos los productos Schwarzkopf <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 
 <!-- ============================================================
@@ -335,11 +523,11 @@
 <section id="trabajos" class="showcase-section">
     <div class="container">
         <div class="text-center mb-5">
-            <div class="section-label reveal">Antes &amp; Después</div>
-            <h2 class="section-title reveal">Trabajos Realizados</h2>
+            <div class="section-label reveal">Resultados Reales</div>
+            <h2 class="section-title reveal">Transformaciones</h2>
             <p class="section-subtitle reveal">
-                Algunos de los looks y transformaciones que creamos para nuestras clientas.<br class="d-none d-md-inline">
-                Pronto llenaremos este espacio con fotos reales de nuestro trabajo.
+                Looks y cambios de imagen que creamos para nuestras clientas.<br class="d-none d-md-inline">
+                Pronto llenaremos este espacio con fotos reales.
             </p>
         </div>
         <div class="row g-4 justify-content-center">
@@ -378,22 +566,48 @@
             <div class="section-label reveal">Vida del Salón</div>
             <h2 class="section-title reveal">Eventos &amp; Marcas</h2>
             <p class="section-subtitle reveal">
-                Realizamos eventos mensuales en el salón y participamos en activaciones<br class="d-none d-md-inline">
-                de las marcas que trabajamos. Aquí compartiremos cada encuentro.
+                Eventos en el salón y activaciones de las marcas que trabajamos.<br class="d-none d-md-inline">
+                Momentos que compartimos con nuestra comunidad.
             </p>
         </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-lg-4 col-md-6 col-10 reveal">
-                <div class="showcase-tile"><i class="bi bi-calendar-event"></i><span>Eventos Mensuales</span></div>
+
+        <div class="row g-4 justify-content-center reveal">
+            <div class="col-6 col-md-4 col-lg-2half">
+                <div class="evento-media-card">
+                    <img src="{% static 'img/eventos/evento-foto-1.jpg' %}" alt="Evento Salón Amanda" class="evento-img">
+                </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-10 reveal">
-                <div class="showcase-tile"><i class="bi bi-people"></i><span>Talleres &amp; Clases</span></div>
+            <div class="col-6 col-md-4 col-lg-2half">
+                <div class="evento-media-card">
+                    <video autoplay muted loop playsinline controls class="evento-video">
+                        <source src="{% static 'videos/eventos/evento-video-1.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-10 reveal">
-                <div class="showcase-tile"><i class="bi bi-award"></i><span>Activaciones de Marca</span></div>
+            <div class="col-6 col-md-4 col-lg-2half">
+                <div class="evento-media-card">
+                    <video autoplay muted loop playsinline controls class="evento-video">
+                        <source src="{% static 'videos/eventos/evento-video-2.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2half">
+                <div class="evento-media-card">
+                    <video autoplay muted loop playsinline controls class="evento-video">
+                        <source src="{% static 'videos/eventos/evento-video-3.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2half">
+                <div class="evento-media-card">
+                    <video autoplay muted loop playsinline controls class="evento-video">
+                        <source src="{% static 'videos/eventos/evento-video-4.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
-        <p class="showcase-note reveal">
+
+        <p class="showcase-note reveal mt-4">
             <i class="bi bi-calendar-heart me-1"></i>¿Quieres enterarte de nuestros próximos eventos?
             <a href="https://wa.me/56939308418?text=Hola%20Sal%C3%B3n%20Amanda%2C%20quiero%20saber%20de%20sus%20pr%C3%B3ximos%20eventos" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.
         </p>

@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Productos Moroccanoil — Salón Amanda{% endblock %}
+{% block title %}Catálogo de Productos — Salón Amanda{% endblock %}
 
 {% block content %}
 <section class="catalogo-section">
@@ -9,11 +9,31 @@
 
         <div class="text-center mb-4">
             <div class="section-label">Tienda</div>
-            <h1 class="section-title">Productos Moroccanoil</h1>
-            <p class="section-subtitle">Catálogo profesional original · Consulta y pide por WhatsApp</p>
+            <h1 class="section-title">Nuestros Productos</h1>
+            <p class="section-subtitle">Moroccanoil &amp; Schwarzkopf Osis+ · Consulta y pide por WhatsApp</p>
         </div>
 
+        <!-- Filtros de marca — tarjetas logo -->
+        <div class="d-flex justify-content-center gap-4 mb-5 reveal marca-filter-wrap">
+            <a href="{% url 'catalogo' %}?marca=moroccanoil{% if q %}&q={{ q }}{% endif %}"
+               class="marca-card {% if marca == 'moroccanoil' %}marca-card--active{% endif %}"
+               title="Ver Moroccanoil">
+                <img src="{% static 'img/marcas/moroccanoil-logo.png' %}" alt="Moroccanoil" class="marca-card__logo">
+            </a>
+            <a href="{% url 'catalogo' %}?marca=schwarzkopf{% if q %}&q={{ q }}{% endif %}"
+               class="marca-card {% if marca == 'schwarzkopf' %}marca-card--active{% endif %}"
+               title="Ver Schwarzkopf">
+                <img src="{% static 'img/marcas/schwarzkopf-logo.png' %}" alt="Schwarzkopf Professional" class="marca-card__logo">
+            </a>
+        </div>
+        {% if marca %}
+        <div class="text-center mb-3" style="margin-top:-1rem;">
+            <a href="{% url 'catalogo' %}{% if q %}?q={{ q }}{% endif %}" class="text-muted small">← Ver todas las marcas</a>
+        </div>
+        {% endif %}
+
         <form method="get" class="catalogo-search mb-4" role="search">
+            {% if marca %}<input type="hidden" name="marca" value="{{ marca }}">{% endif %}
             <div class="input-group">
                 <input type="text" name="q" value="{{ q }}" class="form-control"
                        placeholder="Buscar producto (ej: tratamiento, shampoo, mascarilla)...">
@@ -21,7 +41,7 @@
             </div>
             {% if q %}
             <p class="catalogo-result-info">{{ total }} resultado{{ total|pluralize }} para "{{ q }}" ·
-                <a href="{% url 'catalogo' %}">limpiar</a></p>
+                <a href="{% url 'catalogo' %}{% if marca %}?marca={{ marca }}{% endif %}">limpiar</a></p>
             {% endif %}
         </form>
 
@@ -30,8 +50,8 @@
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product-card">
                     <a href="{% url 'producto_detail' producto.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
-                        <span class="product-badge">Moroccanoil</span>
-                        <img src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                        <span class="product-badge">{{ producto.marca }}</span>
+                        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="product-img-placeholder" loading="lazy">
                     </a>
                     <div class="product-info">
                         <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">

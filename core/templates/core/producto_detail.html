@@ -7,7 +7,7 @@
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ producto.nombre }} — Salón Amanda">
     <meta property="og:description" content="{% if producto.precio_clp %}${{ producto.precio_clp }} · {% endif %}{{ producto.descripcion_corta|default:'Producto Moroccanoil disponible en Salón Amanda. Pídelo por WhatsApp.' }}">
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static producto.imagen_principal %}">
+    <meta property="og:image" content="{{ producto.imagen_url }}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta name="twitter:card" content="summary_large_image">
 {% endblock %}
@@ -30,15 +30,17 @@
             <div class="col-lg-6">
                 <div class="producto-gallery">
                     <div class="producto-gallery-main">
-                        <img id="mainImage" src="{% static producto.imagen_principal %}" alt="{{ producto.nombre }}">
+                        <img id="mainImage" src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}">
                     </div>
                     {% if producto.imagenes.count > 1 %}
                     <div class="producto-gallery-thumbs">
                         {% for img in producto.imagenes.all %}
+                        {% with img_url=img.imagen %}
                         <button type="button" class="producto-thumb {% if forloop.first %}active{% endif %}"
-                                onclick="cambiarImagen(this, '{% static img.imagen %}')">
-                            <img src="{% static img.imagen %}" alt="{{ producto.nombre }} {{ forloop.counter }}" loading="lazy">
+                                onclick="cambiarImagen(this, '{{ img_url|slice:':4' }}' === 'http' ? '{{ img_url }}' : '{% static img.imagen %}')">
+                            <img src="{% if 'http' in img.imagen %}{{ img.imagen }}{% else %}{% static img.imagen %}{% endif %}" alt="{{ producto.nombre }} {{ forloop.counter }}" loading="lazy">
                         </button>
+                        {% endwith %}
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -48,7 +50,7 @@
             <!-- Info -->
             <div class="col-lg-6">
                 <div class="producto-info-detail">
-                    <span class="product-badge mb-2 d-inline-block">Moroccanoil</span>
+                    <span class="product-badge mb-2 d-inline-block">{{ producto.marca }}</span>
                     <h1 class="producto-title">{{ producto.nombre }}</h1>
 
                     {% if producto.precio_clp %}
@@ -86,7 +88,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="product-card">
                         <a href="{% url 'producto_detail' rel.slug %}" class="product-image-wrapper" style="display:block;text-decoration:none;">
-                            <img src="{% static rel.imagen_principal %}" alt="{{ rel.nombre }}" class="product-img-placeholder" style="object-fit:cover;" loading="lazy">
+                            <img src="{{ rel.imagen_url }}" alt="{{ rel.nombre }}" class="product-img-placeholder" loading="lazy">
                         </a>
                         <div class="product-info">
                             <a href="{% url 'producto_detail' rel.slug %}" style="text-decoration:none;color:inherit;">
