@@ -48,3 +48,7 @@ def producto_detail(request, slug):
         'producto': producto,
         'relacionados': relacionados,
     })
+
+
+def links(request):
+    return render(request, 'core/links.html')
