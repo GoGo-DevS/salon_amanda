@@ -57,9 +57,7 @@
                         <a href="{% url 'producto_detail' producto.slug %}" style="text-decoration:none;color:inherit;">
                             <h5 class="product-name">{{ producto.nombre }}</h5>
                         </a>
-                        {% if producto.precio_clp %}
-                        <p class="product-price">${{ producto.precio_clp }}</p>
-                        {% endif %}
+                        <p class="product-price-tag">Consultar precio</p>
                         {% with wa_txt="Hola Salón Amanda, me interesa el producto: "|add:producto.nombre|add:". Más info: "|add:request.scheme|add:"://"|add:request.get_host|add:producto.get_absolute_url %}
                         <a href="https://wa.me/56939308418?text={{ wa_txt|urlencode }}" class="btn btn-consultar" target="_blank" rel="noopener">
                             <i class="bi bi-whatsapp me-1"></i>Pedir por WhatsApp

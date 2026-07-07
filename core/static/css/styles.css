@@ -1379,6 +1379,25 @@ img.product-img-placeholder {
     margin-bottom: 1rem;
     flex-grow: 1;
 }
+.product-price-tag {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    flex-grow: 1;
+}
+.producto-precio-tag {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
 
 .btn-ver-catalogo {
     display: inline-flex;

@@ -53,9 +53,7 @@
                     <span class="product-badge mb-2 d-inline-block">{{ producto.marca }}</span>
                     <h1 class="producto-title">{{ producto.nombre }}</h1>
 
-                    {% if producto.precio_clp %}
-                    <p class="producto-precio">${{ producto.precio_clp }}</p>
-                    {% endif %}
+                    <p class="producto-precio-tag">Consultar precio</p>
 
                     {% if producto.descripcion_corta %}
                     <p class="producto-desc-corta">{{ producto.descripcion_corta }}</p>
