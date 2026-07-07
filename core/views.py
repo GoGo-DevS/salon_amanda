@@ -52,3 +52,45 @@ def producto_detail(request, slug):
 
 def links(request):
     return render(request, 'core/links.html')
+
+
+def profesionales(request):
+    equipo = [
+        {
+            'slug': 'dominique',
+            'nombre': 'Dominique Castillo',
+            'titulo': 'Directora & Colorista Senior',
+            'directora': True,
+            'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, corte, visagismo, manejo de rulos, permanentes, alisados y tratamientos capilares.',
+            'certificaciones': ['Schwarkprof', 'Moroccanoil'],
+            'fotos': [f'img/profesionales/dominique/dominique-{i:02d}.jpg' for i in range(1, 13)],
+        },
+        {
+            'slug': 'danitza',
+            'nombre': 'Danitza San Martín',
+            'titulo': 'Colorista Senior',
+            'directora': False,
+            'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, técnicas de touca, corte, visagismo, alisados y tratamientos capilares.',
+            'certificaciones': ['Redken', 'L\'Oréal', 'Richee'],
+            'fotos': [f'img/profesionales/danitza/danitza-{i:02d}.jpg' for i in range(1, 11)],
+        },
+        {
+            'slug': 'angela',
+            'nombre': 'Angela Contreras',
+            'titulo': 'Nail Art & Lash Lifting',
+            'directora': False,
+            'descripcion': 'Especialista en esmaltado Semi-Permanente, extensión con soft gel, nivelación, Lifting tradicional y técnica coreana.',
+            'certificaciones': [],
+            'fotos': [f'img/profesionales/angela/angela-{i:02d}.jpg' for i in range(1, 7)],
+        },
+        {
+            'slug': 'estefania',
+            'nombre': 'Estefanía Padilla',
+            'titulo': 'Cosmetóloga & Nail Art',
+            'directora': False,
+            'descripcion': 'Especialista en extensión con acrílico, soft gel, nivelación, esmaltado Semi-Permanente, diseños y depilación con cera.',
+            'certificaciones': [],
+            'fotos': [f'img/profesionales/estefania/estefania-{i:02d}.jpg' for i in range(1, 7)],
+        },
+    ]
+    return render(request, 'core/profesionales.html', {'equipo': equipo})

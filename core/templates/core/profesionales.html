@@ -1,0 +1,280 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Nuestro Equipo — Salón Amanda{% endblock %}
+
+{% block extra_head %}
+<style>
+/* ── HERO ── */
+.prof-hero {
+  padding: 120px 0 60px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,191,200,.10) 0%, transparent 70%);
+}
+.prof-hero .section-label { margin-bottom: .5rem; }
+.prof-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.prof-hero p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ── PROFESIONAL CARD ── */
+.prof-section {
+  padding: 64px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.prof-section:last-child { border-bottom: none; }
+
+.prof-photo-wrap {
+  position: relative;
+}
+.prof-photo {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+.badge-directora {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--accent-gold);
+  color: #0a0a0a;
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.prof-info { display: flex; flex-direction: column; justify-content: center; }
+
+.prof-nombre {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--text-primary);
+  margin-bottom: .25rem;
+  line-height: 1.15;
+}
+.prof-titulo {
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.prof-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.prof-certs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+.cert-tag {
+  display: inline-block;
+  border: 1px solid rgba(0,191,200,.35);
+  color: var(--accent-teal);
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.cert-label {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-right: 4px;
+}
+.btn-wa-prof {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: .9rem;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+}
+.btn-wa-prof:hover { opacity: .88; transform: translateY(-2px); color: #fff; }
+
+/* ── GALERÍA DE TRABAJOS ── */
+.prof-gallery-heading {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  margin-top: 2.5rem;
+}
+.prof-gallery {
+  columns: 3 180px;
+  column-gap: 8px;
+}
+.prof-gallery-item {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.prof-gallery-item img {
+  width: 100%;
+  display: block;
+  transition: transform .35s;
+}
+.prof-gallery-item:hover img { transform: scale(1.04); }
+
+/* ── LIGHTBOX ── */
+#lb-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#lb-overlay.active { display: flex; }
+#lb-img {
+  max-width: min(92vw, 700px);
+  max-height: 90vh;
+  border-radius: 10px;
+  object-fit: contain;
+}
+#lb-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: none; border: none;
+  color: #fff; font-size: 2rem;
+  cursor: pointer; line-height: 1;
+}
+
+@media (max-width: 767px) {
+  .prof-gallery { columns: 2 140px; }
+  .prof-info { margin-top: 1.5rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="prof-hero">
+  <div class="container">
+    <div class="section-label">Nuestro Equipo</div>
+    <h1>Expertas en Belleza</h1>
+    <p>Profesionales certificadas con años de experiencia, dedicadas a realzar tu mejor versión.</p>
+  </div>
+</section>
+
+<section style="padding: 0 0 80px;">
+  <div class="container">
+
+    {% for p in equipo %}
+    <div class="prof-section" id="{{ p.slug }}">
+
+      <div class="row g-5 align-items-start {% if forloop.counter|divisibleby:2 %}flex-lg-row-reverse{% endif %}">
+
+        <!-- Foto perfil -->
+        <div class="col-lg-4 col-md-5">
+          <div class="prof-photo-wrap">
+            <img src="{% static 'img/profesionales/'|add:p.slug|add:'-perfil.jpg' %}"
+                 alt="{{ p.nombre }}"
+                 class="prof-photo reveal">
+            {% if p.directora %}
+            <span class="badge-directora">Directora</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Info + galería -->
+        <div class="col-lg-8 col-md-7">
+          <div class="prof-info reveal">
+            <p class="prof-titulo">{{ p.titulo }}</p>
+            <h2 class="prof-nombre">{{ p.nombre }}</h2>
+            <p class="prof-desc">{{ p.descripcion }}</p>
+
+            {% if p.certificaciones %}
+            <div class="prof-certs">
+              <span class="cert-label">Cert.</span>
+              {% for cert in p.certificaciones %}
+              <span class="cert-tag">{{ cert }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            <a href="https://wa.me/56939308418?text=Hola%20Sal%C3%B3n%20Amanda%2C%20quiero%20reservar%20hora%20con%20{{ p.nombre|urlencode }}"
+               target="_blank" rel="noopener" class="btn-wa-prof">
+              <i class="bi bi-whatsapp"></i> Reservar con {{ p.nombre.split.0 }}
+            </a>
+          </div>
+
+          {% if p.fotos %}
+          <p class="prof-gallery-heading">Trabajos realizados</p>
+          <div class="prof-gallery reveal">
+            {% for foto in p.fotos %}
+            <div class="prof-gallery-item" onclick="openLb('{% static foto %}')">
+              <img src="{% static foto %}" alt="Trabajo de {{ p.nombre }}" loading="lazy">
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lb-overlay" onclick="closeLb()">
+  <button id="lb-close" onclick="closeLb()" aria-label="Cerrar">×</button>
+  <img id="lb-img" src="" alt="Trabajo ampliado">
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function openLb(src) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lb-overlay').classList.remove('active');
+  document.getElementById('lb-img').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+</script>
+{% endblock %}
