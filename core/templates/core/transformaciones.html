@@ -13,141 +13,75 @@
 .transf-hero h1 {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 5vw, 3.2rem);
-  color: var(--text-primary);
+  color: var(--text-primary, #fff);
   margin-bottom: 1rem;
 }
 .transf-hero p {
-  color: var(--text-muted);
+  color: var(--text-muted, #888);
   font-size: 1.05rem;
-  max-width: 540px;
+  max-width: 460px;
   margin: 0 auto;
 }
 
-/* ── GRID DE TRANSFORMACIONES ── */
+/* ── GRID PRINCIPAL ── */
 .transf-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  padding: 60px 0 80px;
+  gap: 16px;
+  padding: 48px 0 80px;
 }
-@media (max-width: 767px) {
-  .transf-grid { grid-template-columns: 1fr; gap: 48px; }
-}
-
-.transf-card {}
-.transf-meta {
-  margin-bottom: 14px;
-}
-.transf-titulo {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-.transf-desc {
-  color: var(--text-muted);
-  font-size: .88rem;
-  line-height: 1.6;
-  margin-bottom: 6px;
-}
-.transf-prof {
-  font-family: var(--font-sans);
-  font-size: .72rem;
-  font-weight: 700;
-  color: var(--accent-teal);
-  letter-spacing: .1em;
-  text-transform: uppercase;
+@media (max-width: 639px) {
+  .transf-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
-/* ── BEFORE/AFTER SLIDER ── */
-.ba-wrap {
+/* ── PAR ANTES/DESPUÉS ── */
+.transf-pair {
+  display: flex;
+  gap: 3px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,.22);
+  background: #0a0a0a;
+}
+
+.transf-side {
   position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+.transf-side img {
   width: 100%;
   aspect-ratio: 3/4;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: ew-resize;
-  user-select: none;
-  touch-action: none;
-}
-
-.ba-after {
-  position: absolute;
-  inset: 0;
-}
-.ba-after img {
-  width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  pointer-events: none;
+  transition: transform .45s ease;
+}
+.transf-pair:hover .transf-side img {
+  transform: scale(1.03);
 }
 
-.ba-before {
+/* Etiquetas sutiles */
+.transf-label {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-  width: 50%;
-  will-change: width;
-}
-.ba-before img {
-  position: absolute;
-  top: 0; left: 0;
-  height: 100%;
-  width: var(--ba-w, 100%);   /* set by JS to always equal wrap width */
-  object-fit: cover;
-  object-position: left center;
-  display: block;
-  pointer-events: none;
-  max-width: none;
-}
-
-.ba-handle {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 3px;
-  background: #fff;
-  transform: translateX(-50%);
-  will-change: left;
-  z-index: 10;
-}
-.ba-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,.35);
-  font-size: 1.1rem;
-  color: #0a0a0a;
-  flex-shrink: 0;
-}
-
-.ba-label {
-  position: absolute;
-  bottom: 14px;
-  font-family: var(--font-sans);
-  font-size: .65rem;
+  bottom: 10px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: .58rem;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .13em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 20px;
   pointer-events: none;
+  backdrop-filter: blur(4px);
 }
-.ba-label-antes {
-  left: 12px;
-  background: rgba(0,0,0,.55);
-  color: #fff;
+.transf-label-antes {
+  left: 10px;
+  background: rgba(0,0,0,.58);
+  color: rgba(255,255,255,.9);
 }
-.ba-label-despues {
-  right: 12px;
-  background: rgba(0,191,200,.85);
+.transf-label-despues {
+  right: 10px;
+  background: rgba(0,191,200,.82);
   color: #0a0a0a;
 }
 
@@ -157,7 +91,7 @@
   padding: 0 0 80px;
 }
 .transf-cta p {
-  color: var(--text-muted);
+  color: var(--text-muted, #888);
   margin-bottom: 1.5rem;
   font-size: 1rem;
 }
@@ -170,7 +104,7 @@
   <div class="container">
     <div class="section-label">Resultados Reales</div>
     <h1>Transformaciones</h1>
-    <p>Arrastra el divisor para ver el antes y después de cada clienta. Todo realizado en Salón Amanda.</p>
+    <p>Trabajos realizados por nuestras profesionales en Salón Amanda.</p>
   </div>
 </section>
 
@@ -178,26 +112,16 @@
   <div class="container">
     <div class="transf-grid">
       {% for par in pares %}
-      <div class="transf-card reveal">
+      <div class="transf-pair reveal">
 
-        <div class="transf-meta">
-          <h2 class="transf-titulo">{{ par.titulo }}</h2>
-          <p class="transf-desc">{{ par.descripcion }}</p>
-          <span class="transf-prof">Por {{ par.profesional }}</span>
+        <div class="transf-side">
+          <img src="{% static par.antes %}" alt="Antes" loading="lazy">
+          <span class="transf-label transf-label-antes">Antes</span>
         </div>
 
-        <div class="ba-wrap" data-ba>
-          <div class="ba-after">
-            <img src="{% static par.despues %}" alt="Después — {{ par.titulo }}" loading="lazy">
-          </div>
-          <div class="ba-before">
-            <img src="{% static par.antes %}" alt="Antes — {{ par.titulo }}" loading="lazy">
-          </div>
-          <div class="ba-handle">
-            <div class="ba-btn">⟺</div>
-          </div>
-          <span class="ba-label ba-label-antes">Antes</span>
-          <span class="ba-label ba-label-despues">Después</span>
+        <div class="transf-side">
+          <img src="{% static par.despues %}" alt="Después" loading="lazy">
+          <span class="transf-label transf-label-despues">Después</span>
         </div>
 
       </div>
@@ -217,41 +141,4 @@
   </div>
 </section>
 
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-document.querySelectorAll('[data-ba]').forEach(function(wrap) {
-  var before = wrap.querySelector('.ba-before');
-  var beforeImg = before.querySelector('img');
-  var handle = wrap.querySelector('.ba-handle');
-
-  function setPos(clientX) {
-    var rect = wrap.getBoundingClientRect();
-    var pct = Math.min(Math.max((clientX - rect.left) / rect.width, 0.02), 0.98);
-    var pxPct = (pct * 100).toFixed(2) + '%';
-    before.style.width = pxPct;
-    handle.style.left = pxPct;
-    // keep img always as wide as the full wrap so it never "shrinks"
-    beforeImg.style.width = rect.width + 'px';
-  }
-
-  // init image width
-  function init() {
-    beforeImg.style.width = wrap.offsetWidth + 'px';
-  }
-  init();
-  window.addEventListener('resize', init);
-
-  // Pointer Events API — unifica mouse + touch, respeta touch-action:none del CSS
-  wrap.addEventListener('pointerdown', function(e) {
-    wrap.setPointerCapture(e.pointerId);
-    setPos(e.clientX);
-  });
-  wrap.addEventListener('pointermove', function(e) {
-    if (e.buttons === 0) return;
-    setPos(e.clientX);
-  });
-});
-</script>
 {% endblock %}
