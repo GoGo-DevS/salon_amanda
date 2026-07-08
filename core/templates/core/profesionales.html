@@ -143,18 +143,19 @@
   margin-bottom: 1rem;
 }
 .prof-gallery {
-  columns: 5 130px;
-  column-gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
 }
 .prof-gallery-item {
-  break-inside: avoid;
-  margin-bottom: 8px;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
 }
 .prof-gallery-item img {
   width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   display: block;
   transition: transform .35s;
 }
@@ -186,11 +187,11 @@
 }
 
 @media (max-width: 991px) {
-  .prof-gallery { columns: 3 120px; }
+  .prof-gallery { grid-template-columns: repeat(3, 1fr); }
   .prof-info { padding-left: 0; margin-top: 2rem; }
 }
 @media (max-width: 575px) {
-  .prof-gallery { columns: 2 120px; }
+  .prof-gallery { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 {% endblock %}
@@ -254,7 +255,7 @@
         <div class="col-12">
           <p class="prof-gallery-heading">Trabajos realizados</p>
           <div class="prof-gallery reveal">
-            {% for foto in p.fotos|slice:":8" %}
+            {% for foto in p.fotos|slice:":6" %}
             <div class="prof-gallery-item" onclick="openLb('{% static foto %}')">
               <img src="{% static foto %}" alt="Trabajo de {{ p.nombre }}" loading="lazy">
             </div>
