@@ -678,6 +678,72 @@
 </section>
 
 {% block extra_scripts %}{% endblock %}
+
+{% if promociones %}
+{% with promo=promociones.0 %}
+<div id="promo-popup"
+     style="display:none;position:fixed;inset:0;z-index:9999;
+            background:rgba(0,0,0,.78);
+            align-items:center;justify-content:center;padding:1rem;"
+     onclick="if(event.target===this)cerrarPromo()">
+  <div style="background:#1a1a1a;
+              border:1px solid rgba(0,191,200,.35);
+              border-radius:22px;overflow:hidden;
+              max-width:460px;width:100%;
+              position:relative;
+              box-shadow:0 24px 80px rgba(0,0,0,.7);
+              animation:promoIn .35s cubic-bezier(.22,.61,.36,1) both;">
+    <!-- X -->
+    <button onclick="cerrarPromo()"
+            style="position:absolute;top:12px;right:12px;
+                   background:rgba(10,10,10,.7);border:none;
+                   color:#fff;width:34px;height:34px;border-radius:50%;
+                   font-size:1.2rem;cursor:pointer;z-index:10;
+                   display:flex;align-items:center;justify-content:center;
+                   line-height:1;backdrop-filter:blur(4px);">✕</button>
+    <!-- Imagen -->
+    {% if promo.imagen %}
+    <img src="{{ promo.imagen.url }}" alt="{{ promo.titulo }}"
+         style="width:100%;height:240px;object-fit:cover;display:block;flex-shrink:0;">
+    {% else %}
+    <div style="height:12px;background:linear-gradient(90deg,#00BFC8,#C8A96E);"></div>
+    {% endif %}
+    <!-- Contenido -->
+    <div style="padding:1.75rem 1.75rem 2rem;">
+      <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;">
+        <span style="background:#C8A96E;color:#0a0a0a;
+                     font-size:.6rem;font-weight:800;letter-spacing:.15em;
+                     text-transform:uppercase;padding:3px 10px;border-radius:20px;">Promoción</span>
+        {% if promo.fecha_fin %}
+        <span style="color:#888;font-size:.75rem;">Hasta {{ promo.fecha_fin|date:"d/m" }}</span>
+        {% endif %}
+      </div>
+      <h3 style="font-family:var(--font-serif,serif);font-size:1.55rem;
+                 color:#fff;margin:0 0 .6rem;line-height:1.25;">{{ promo.titulo }}</h3>
+      <p style="color:#bbb;font-size:.95rem;line-height:1.7;margin:0 0 1.4rem;">{{ promo.descripcion }}</p>
+      <a href="{{ promo.btn_url }}" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:8px;
+                background:#25D366;color:#fff;
+                font-weight:700;font-size:.92rem;
+                padding:13px 26px;border-radius:30px;text-decoration:none;">
+        <i class="bi bi-whatsapp"></i> {{ promo.btn_texto }}
+      </a>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes promoIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:none}}
+</style>
+<script>
+function cerrarPromo(){document.getElementById('promo-popup').style.display='none';}
+setTimeout(function(){
+  var p=document.getElementById('promo-popup');
+  if(p) p.style.display='flex';
+},1000);
+</script>
+{% endwith %}
+{% endif %}
+
 <script>
 document.querySelectorAll('[data-ba]').forEach(function(wrap){
     var before=wrap.querySelector('.ba-before'),handle=wrap.querySelector('.ba-handle'),dragging=false;
