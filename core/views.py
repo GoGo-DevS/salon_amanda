@@ -7,9 +7,36 @@ from .models import Producto
 def home(request):
     destacados = Producto.objects.filter(activo=True, destacado=True).exclude(sku__startswith='OSIS')[:8]
     osis_productos = Producto.objects.filter(activo=True, sku__startswith='OSIS')[:4]
+    pares_transf = [
+        {
+            'titulo': 'Corrección de Color',
+            'profesional': 'Danitza San Martín',
+            'antes': 'img/profesionales/danitza/danitza-03.jpg',
+            'despues': 'img/profesionales/danitza/danitza-04.jpg',
+        },
+        {
+            'titulo': 'Coloración & Ondas',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-07.jpg',
+            'despues': 'img/profesionales/dominique/dominique-08.jpg',
+        },
+        {
+            'titulo': 'Alisado Keratina',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-04.jpg',
+            'despues': 'img/profesionales/dominique/dominique-03.jpg',
+        },
+        {
+            'titulo': 'Platinado Premium',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-11.jpg',
+            'despues': 'img/profesionales/dominique/dominique-12.jpg',
+        },
+    ]
     return render(request, 'core/home.html', {
         'productos_destacados': destacados,
         'osis_productos': osis_productos,
+        'pares_transf': pares_transf,
     })
 
 
