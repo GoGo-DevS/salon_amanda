@@ -135,7 +135,7 @@
   margin-top: 2.5rem;
 }
 .prof-gallery {
-  columns: 3 180px;
+  columns: 4 160px;
   column-gap: 8px;
 }
 .prof-gallery-item {
@@ -200,7 +200,7 @@
     {% for p in equipo %}
     <div class="prof-section" id="{{ p.slug }}">
 
-      <div class="row g-5 align-items-start {% if forloop.counter|divisibleby:2 %}flex-lg-row-reverse{% endif %}">
+      <div class="row g-5 align-items-center {% if forloop.counter|divisibleby:2 %}flex-lg-row-reverse{% endif %}">
 
         <!-- Foto perfil -->
         <div class="col-lg-4 col-md-5">
@@ -214,7 +214,7 @@
           </div>
         </div>
 
-        <!-- Info + galería -->
+        <!-- Info -->
         <div class="col-lg-8 col-md-7">
           <div class="prof-info reveal">
             <p class="prof-titulo">{{ p.titulo }}</p>
@@ -235,8 +235,12 @@
               <i class="bi bi-whatsapp"></i> Reservar con {{ p.nombre.split.0 }}
             </a>
           </div>
+        </div>
+      </div>
 
-          {% if p.fotos %}
+      {% if p.fotos %}
+      <div class="row mt-5">
+        <div class="col-12">
           <p class="prof-gallery-heading">Trabajos realizados</p>
           <div class="prof-gallery reveal">
             {% for foto in p.fotos %}
@@ -245,10 +249,10 @@
             </div>
             {% endfor %}
           </div>
-          {% endif %}
-
         </div>
       </div>
+      {% endif %}
+
     </div>
     {% endfor %}
 

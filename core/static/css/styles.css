@@ -521,6 +521,7 @@ section { padding: 6rem 0; }
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: top center;
     border: 3px solid rgba(0,191,200,0.25);
     display: block;
 }
