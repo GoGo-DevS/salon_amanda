@@ -27,7 +27,7 @@
 
 /* ── PROFESIONAL CARD ── */
 .prof-section {
-  padding: 64px 0;
+  padding: 80px 0;
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .prof-section:last-child { border-bottom: none; }
@@ -37,10 +37,12 @@
 }
 .prof-photo {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 4/5;
   object-fit: cover;
-  border-radius: 16px;
+  object-position: top center;
+  border-radius: 20px;
   display: block;
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
 }
 .badge-directora {
   position: absolute;
@@ -57,11 +59,17 @@
   border-radius: 20px;
 }
 
-.prof-info { display: flex; flex-direction: column; justify-content: center; }
+.prof-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 1rem;
+}
 
 .prof-nombre {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   color: var(--text-primary);
   margin-bottom: .25rem;
   line-height: 1.15;
@@ -73,19 +81,19 @@
   color: var(--accent-teal);
   letter-spacing: .1em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 .prof-desc {
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
 }
 .prof-certs {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 .cert-tag {
   display: inline-block;
@@ -116,10 +124,11 @@
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: .9rem;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 30px;
   text-decoration: none;
   transition: opacity .2s, transform .15s;
+  width: fit-content;
 }
 .btn-wa-prof:hover { opacity: .88; transform: translateY(-2px); color: #fff; }
 
@@ -132,10 +141,9 @@
   letter-spacing: .14em;
   text-transform: uppercase;
   margin-bottom: 1rem;
-  margin-top: 2.5rem;
 }
 .prof-gallery {
-  columns: 4 160px;
+  columns: 5 130px;
   column-gap: 8px;
 }
 .prof-gallery-item {
@@ -177,9 +185,12 @@
   cursor: pointer; line-height: 1;
 }
 
-@media (max-width: 767px) {
-  .prof-gallery { columns: 2 140px; }
-  .prof-info { margin-top: 1.5rem; }
+@media (max-width: 991px) {
+  .prof-gallery { columns: 3 120px; }
+  .prof-info { padding-left: 0; margin-top: 2rem; }
+}
+@media (max-width: 575px) {
+  .prof-gallery { columns: 2 120px; }
 }
 </style>
 {% endblock %}
@@ -200,10 +211,10 @@
     {% for p in equipo %}
     <div class="prof-section" id="{{ p.slug }}">
 
-      <div class="row g-5 align-items-center {% if forloop.counter|divisibleby:2 %}flex-lg-row-reverse{% endif %}">
+      <div class="row g-5 align-items-center">
 
         <!-- Foto perfil -->
-        <div class="col-lg-4 col-md-5">
+        <div class="col-lg-5 col-md-5">
           <div class="prof-photo-wrap">
             <img src="{% static 'img/profesionales/'|add:p.slug|add:'-perfil.jpg' %}"
                  alt="{{ p.nombre }}"
@@ -215,7 +226,7 @@
         </div>
 
         <!-- Info -->
-        <div class="col-lg-8 col-md-7">
+        <div class="col-lg-7 col-md-7">
           <div class="prof-info reveal">
             <p class="prof-titulo">{{ p.titulo }}</p>
             <h2 class="prof-nombre">{{ p.nombre }}</h2>
@@ -239,11 +250,11 @@
       </div>
 
       {% if p.fotos %}
-      <div class="row mt-5">
+      <div class="row mt-4">
         <div class="col-12">
           <p class="prof-gallery-heading">Trabajos realizados</p>
           <div class="prof-gallery reveal">
-            {% for foto in p.fotos %}
+            {% for foto in p.fotos|slice:":8" %}
             <div class="prof-gallery-item" onclick="openLb('{% static foto %}')">
               <img src="{% static foto %}" alt="Trabajo de {{ p.nombre }}" loading="lazy">
             </div>
