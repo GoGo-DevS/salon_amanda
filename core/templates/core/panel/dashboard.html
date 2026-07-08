@@ -1,0 +1,77 @@
+{% extends 'core/panel/base.html' %}
+
+{% block title %}Promociones — Panel Salón Amanda{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+  <div class="panel-section-title">
+    <div class="dot"></div>
+    Promociones activas
+  </div>
+  <a href="{% url 'panel_promo_crear' %}" class="btn-teal">
+    <i class="bi bi-plus-lg"></i> Nueva promoción
+  </a>
+</div>
+
+{% if promociones %}
+<div class="d-flex flex-column gap-3">
+  {% for promo in promociones %}
+  <div class="promo-card {% if not promo.activa %}inactiva{% endif %}">
+
+    <!-- Estado toggle -->
+    <div style="flex-shrink:0;padding-top:2px;">
+      <form method="post" action="{% url 'panel_promo_toggle' promo.pk %}">
+        {% csrf_token %}
+        <button type="submit" title="{% if promo.activa %}Desactivar{% else %}Activar{% endif %}"
+          style="background:none;border:none;cursor:pointer;padding:0;">
+          {% if promo.activa %}
+            <i class="bi bi-toggle-on" style="font-size:1.6rem;color:#00BFC8;"></i>
+          {% else %}
+            <i class="bi bi-toggle-off" style="font-size:1.6rem;color:#444;"></i>
+          {% endif %}
+        </button>
+      </form>
+    </div>
+
+    <!-- Info -->
+    <div style="flex-grow:1;min-width:0;">
+      <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+        <span class="promo-titulo">{{ promo.titulo }}</span>
+        {% if promo.activa %}
+          <span class="badge-activa">Activa</span>
+        {% else %}
+          <span class="badge-inactiva">Inactiva</span>
+        {% endif %}
+      </div>
+      <p class="promo-desc">{{ promo.descripcion|truncatechars:120 }}</p>
+      <p class="promo-meta">
+        Botón: "{{ promo.btn_texto }}"
+        {% if promo.fecha_fin %} · Vence: {{ promo.fecha_fin|date:"d/m/Y" }}{% else %} · Sin vencimiento{% endif %}
+      </p>
+    </div>
+
+    <!-- Acciones -->
+    <div class="d-flex gap-2 flex-shrink-0 flex-column flex-sm-row align-items-start">
+      <a href="{% url 'panel_promo_editar' promo.pk %}" class="btn-ghost">
+        <i class="bi bi-pencil"></i> Editar
+      </a>
+      <form method="post" action="{% url 'panel_promo_eliminar' promo.pk %}"
+            onsubmit="return confirm('¿Eliminar «{{ promo.titulo }}»? No se puede deshacer.')">
+        {% csrf_token %}
+        <button type="submit" class="btn-danger-ghost">
+          <i class="bi bi-trash"></i>
+        </button>
+      </form>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="empty-state">
+  <i class="bi bi-tag"></i>
+  <p style="font-size:1rem;color:#666;">Aún no hay promociones.<br>Crea la primera con el botón de arriba.</p>
+</div>
+{% endif %}
+{% endblock %}

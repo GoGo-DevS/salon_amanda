@@ -1,7 +1,11 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import models
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 from .models import Producto, Promocion
 
@@ -120,6 +124,86 @@ def transformaciones(request):
         },
     ]
     return render(request, 'core/transformaciones.html', {'pares': pares})
+
+
+# ── PANEL INTERNO ────────────────────────────────────────────
+
+def panel_login(request):
+    if request.user.is_authenticated:
+        return redirect('panel_dashboard')
+    error = None
+    if request.method == 'POST':
+        user = authenticate(request,
+                            username=request.POST.get('username', ''),
+                            password=request.POST.get('password', ''))
+        if user:
+            login(request, user)
+            return redirect('panel_dashboard')
+        error = 'Usuario o contraseña incorrectos.'
+    return render(request, 'core/panel/login.html', {'error': error})
+
+
+def panel_logout(request):
+    logout(request)
+    return redirect('panel_login')
+
+
+@login_required(login_url='panel_login')
+def panel_dashboard(request):
+    promociones = Promocion.objects.all().order_by('-activa', 'titulo')
+    return render(request, 'core/panel/dashboard.html', {'promociones': promociones})
+
+
+@login_required(login_url='panel_login')
+def panel_promo_crear(request):
+    if request.method == 'POST':
+        Promocion.objects.create(
+            titulo=request.POST.get('titulo', '').strip(),
+            descripcion=request.POST.get('descripcion', '').strip(),
+            btn_texto=request.POST.get('btn_texto', 'Reservar ahora').strip(),
+            btn_url=request.POST.get('btn_url', '').strip(),
+            fecha_fin=request.POST.get('fecha_fin') or None,
+            activa=bool(request.POST.get('activa')),
+        )
+        messages.success(request, 'Promoción creada correctamente.')
+        return redirect('panel_dashboard')
+    return render(request, 'core/panel/promo_form.html', {'promo': None})
+
+
+@login_required(login_url='panel_login')
+def panel_promo_editar(request, pk):
+    promo = get_object_or_404(Promocion, pk=pk)
+    if request.method == 'POST':
+        promo.titulo = request.POST.get('titulo', '').strip()
+        promo.descripcion = request.POST.get('descripcion', '').strip()
+        promo.btn_texto = request.POST.get('btn_texto', 'Reservar ahora').strip()
+        promo.btn_url = request.POST.get('btn_url', '').strip()
+        promo.fecha_fin = request.POST.get('fecha_fin') or None
+        promo.activa = bool(request.POST.get('activa'))
+        promo.save()
+        messages.success(request, 'Promoción actualizada.')
+        return redirect('panel_dashboard')
+    return render(request, 'core/panel/promo_form.html', {'promo': promo})
+
+
+@login_required(login_url='panel_login')
+@require_POST
+def panel_promo_eliminar(request, pk):
+    promo = get_object_or_404(Promocion, pk=pk)
+    promo.delete()
+    messages.success(request, 'Promoción eliminada.')
+    return redirect('panel_dashboard')
+
+
+@login_required(login_url='panel_login')
+@require_POST
+def panel_promo_toggle(request, pk):
+    promo = get_object_or_404(Promocion, pk=pk)
+    promo.activa = not promo.activa
+    promo.save()
+    estado = 'activada' if promo.activa else 'desactivada'
+    messages.success(request, f'Promoción {estado}.')
+    return redirect('panel_dashboard')
 
 
 def profesionales(request):

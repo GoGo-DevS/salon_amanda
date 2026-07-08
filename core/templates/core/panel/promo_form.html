@@ -1,0 +1,80 @@
+{% extends 'core/panel/base.html' %}
+
+{% block title %}{% if promo %}Editar{% else %}Nueva{% endif %} Promoción — Panel Salón Amanda{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-3 mb-4">
+  <a href="{% url 'panel_dashboard' %}" class="btn-ghost" style="padding:8px 12px;">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div class="panel-section-title" style="margin-bottom:0;">
+    <div class="dot"></div>
+    {% if promo %}Editar promoción{% else %}Nueva promoción{% endif %}
+  </div>
+</div>
+
+<div class="panel-form">
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label">Título de la promoción <span style="color:#e05;">*</span></label>
+      <input type="text" name="titulo" class="form-control"
+             value="{{ promo.titulo|default:'' }}"
+             placeholder="ej: 20% OFF Alisado Keratina"
+             maxlength="120" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Descripción <span style="color:#e05;">*</span></label>
+      <textarea name="descripcion" class="form-control"
+                placeholder="Detalla qué incluye la promo, condiciones, etc."
+                required>{{ promo.descripcion|default:'' }}</textarea>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-sm-6">
+        <label class="form-label">Texto del botón</label>
+        <input type="text" name="btn_texto" class="form-control"
+               value="{{ promo.btn_texto|default:'Reservar ahora' }}"
+               maxlength="60"
+               placeholder="Reservar ahora">
+      </div>
+      <div class="col-sm-6">
+        <label class="form-label">Link del botón</label>
+        <input type="url" name="btn_url" class="form-control"
+               value="{{ promo.btn_url|default:'https://link.agendapro.com/cl/salonamanda/9581b2de' }}"
+               placeholder="https://...">
+      </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6">
+        <label class="form-label">Fecha de vencimiento <span style="color:#888;font-weight:400;">(opcional)</span></label>
+        <input type="date" name="fecha_fin" class="form-control"
+               value="{{ promo.fecha_fin|date:'Y-m-d'|default:'' }}">
+        <div style="color:#666;font-size:.78rem;margin-top:.3rem;">Dejá vacío si la promo no vence.</div>
+      </div>
+      <div class="col-sm-6 d-flex align-items-center" style="padding-top:1.5rem;">
+        <div class="form-check form-switch" style="margin:0;">
+          <input class="form-check-input" type="checkbox" name="activa" id="activa"
+                 {% if promo.activa or not promo %}checked{% endif %}
+                 style="width:2.5rem;height:1.3rem;cursor:pointer;">
+          <label class="form-check-label form-label" for="activa" style="margin:0 0 0 .6rem;cursor:pointer;">
+            Promo activa (visible en la web)
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn-teal">
+        <i class="bi bi-check-lg"></i>
+        {% if promo %}Guardar cambios{% else %}Crear promoción{% endif %}
+      </button>
+      <a href="{% url 'panel_dashboard' %}" class="btn-ghost">Cancelar</a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
