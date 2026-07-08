@@ -14,7 +14,7 @@
 </div>
 
 <div class="panel-form">
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="mb-3">
@@ -30,6 +30,21 @@
       <textarea name="descripcion" class="form-control"
                 placeholder="Detalla qué incluye la promo, condiciones, etc."
                 required>{{ promo.descripcion|default:'' }}</textarea>
+    </div>
+
+    <!-- IMAGEN -->
+    <div class="mb-4">
+      <label class="form-label">Foto de la promoción <span style="color:#888;font-weight:400;">(opcional)</span></label>
+      {% if promo.imagen %}
+      <div style="margin-bottom:.75rem;">
+        <img src="{{ promo.imagen.url }}" alt="Imagen actual"
+             style="max-height:180px;border-radius:10px;border:1px solid rgba(255,255,255,.1);display:block;">
+        <p style="color:#666;font-size:.78rem;margin-top:.4rem;">Imagen actual — subí una nueva para reemplazarla.</p>
+      </div>
+      {% endif %}
+      <input type="file" name="imagen" class="form-control" accept="image/*"
+             style="cursor:pointer;">
+      <div style="color:#666;font-size:.78rem;margin-top:.3rem;">JPG o PNG. Tamaño recomendado: 800×600 o más.</div>
     </div>
 
     <div class="row g-3 mb-3">

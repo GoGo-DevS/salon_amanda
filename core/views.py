@@ -157,7 +157,7 @@ def panel_dashboard(request):
 @login_required(login_url='panel_login')
 def panel_promo_crear(request):
     if request.method == 'POST':
-        Promocion.objects.create(
+        promo = Promocion(
             titulo=request.POST.get('titulo', '').strip(),
             descripcion=request.POST.get('descripcion', '').strip(),
             btn_texto=request.POST.get('btn_texto', 'Reservar ahora').strip(),
@@ -165,6 +165,9 @@ def panel_promo_crear(request):
             fecha_fin=request.POST.get('fecha_fin') or None,
             activa=bool(request.POST.get('activa')),
         )
+        if request.FILES.get('imagen'):
+            promo.imagen = request.FILES['imagen']
+        promo.save()
         messages.success(request, 'Promoción creada correctamente.')
         return redirect('panel_dashboard')
     return render(request, 'core/panel/promo_form.html', {'promo': None})
@@ -180,6 +183,8 @@ def panel_promo_editar(request, pk):
         promo.btn_url = request.POST.get('btn_url', '').strip()
         promo.fecha_fin = request.POST.get('fecha_fin') or None
         promo.activa = bool(request.POST.get('activa'))
+        if request.FILES.get('imagen'):
+            promo.imagen = request.FILES['imagen']
         promo.save()
         messages.success(request, 'Promoción actualizada.')
         return redirect('panel_dashboard')

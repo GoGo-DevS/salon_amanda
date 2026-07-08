@@ -60,6 +60,8 @@ class Producto(models.Model):
 class Promocion(models.Model):
     titulo      = models.CharField(max_length=120)
     descripcion = models.TextField()
+    imagen      = models.ImageField(upload_to='promociones/', null=True, blank=True,
+                                    help_text='Foto de la promo (jpg/png). Opcional.')
     btn_texto   = models.CharField(max_length=60, default='Reservar ahora')
     btn_url     = models.CharField(max_length=500, default='https://link.agendapro.com/cl/salonamanda/9581b2de')
     activa      = models.BooleanField(default=True)
