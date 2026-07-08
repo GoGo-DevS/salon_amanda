@@ -1,7 +1,9 @@
 from django.core.paginator import Paginator
+from django.db import models
 from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
 
-from .models import Producto
+from .models import Producto, Promocion
 
 
 def home(request):
@@ -33,10 +35,15 @@ def home(request):
             'despues': 'img/profesionales/dominique/dominique-12.jpg',
         },
     ]
+    hoy = timezone.now().date()
+    promociones = Promocion.objects.filter(activa=True).filter(
+        models.Q(fecha_fin__isnull=True) | models.Q(fecha_fin__gte=hoy)
+    )
     return render(request, 'core/home.html', {
         'productos_destacados': destacados,
         'osis_productos': osis_productos,
         'pares_transf': pares_transf,
+        'promociones': promociones,
     })
 
 
