@@ -3,7 +3,7 @@ services:
     name: salon-amanda
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py importar_productos
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py importar_productos && python manage.py ensure_superuser
     startCommand: gunicorn config.wsgi:application --workers 2 --bind 0.0.0.0:$PORT
     envVars:
       - key: DEBUG
