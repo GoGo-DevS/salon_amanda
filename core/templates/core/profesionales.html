@@ -31,6 +31,9 @@
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .prof-section:last-child { border-bottom: none; }
+@media (max-width: 767px) {
+  .prof-section { padding: 40px 0; }
+}
 
 .prof-photo-wrap {
   position: relative;
@@ -212,10 +215,10 @@
     {% for p in equipo %}
     <div class="prof-section" id="{{ p.slug }}">
 
-      <div class="row g-5 align-items-center">
+      <div class="row g-4 g-md-5 align-items-center">
 
         <!-- Foto perfil -->
-        <div class="col-lg-5 col-md-5">
+        <div class="col-lg-5 col-md-5 col-7 mx-auto" style="max-width:340px;">
           <div class="prof-photo-wrap">
             <img src="{% static 'img/profesionales/'|add:p.slug|add:'-perfil.jpg' %}"
                  alt="{{ p.nombre }}"

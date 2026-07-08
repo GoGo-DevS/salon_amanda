@@ -90,14 +90,14 @@
   will-change: width;
 }
 .ba-before img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
   position: absolute;
   top: 0; left: 0;
-  /* match parent width to keep image correct */
-  min-width: 200%;
+  height: 100%;
+  width: var(--ba-w, 100%);   /* set by JS to always equal wrap width */
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+  pointer-events: none;
   max-width: none;
 }
 
@@ -223,24 +223,35 @@
 <script>
 document.querySelectorAll('[data-ba]').forEach(function(wrap) {
   var before = wrap.querySelector('.ba-before');
+  var beforeImg = before.querySelector('img');
   var handle = wrap.querySelector('.ba-handle');
-  var dragging = false;
 
-  function setPos(x) {
+  function setPos(clientX) {
     var rect = wrap.getBoundingClientRect();
-    var pct = Math.min(Math.max((x - rect.left) / rect.width, 0.02), 0.98);
+    var pct = Math.min(Math.max((clientX - rect.left) / rect.width, 0.02), 0.98);
     var pxPct = (pct * 100).toFixed(2) + '%';
     before.style.width = pxPct;
     handle.style.left = pxPct;
+    // keep img always as wide as the full wrap so it never "shrinks"
+    beforeImg.style.width = rect.width + 'px';
   }
 
-  wrap.addEventListener('mousedown', function(e) { dragging = true; setPos(e.clientX); });
-  window.addEventListener('mousemove', function(e) { if (dragging) setPos(e.clientX); });
-  window.addEventListener('mouseup', function() { dragging = false; });
+  // init image width
+  function init() {
+    beforeImg.style.width = wrap.offsetWidth + 'px';
+  }
+  init();
+  window.addEventListener('resize', init);
 
-  wrap.addEventListener('touchstart', function(e) { dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
-  window.addEventListener('touchmove', function(e) { if (dragging) setPos(e.touches[0].clientX); }, {passive:true});
-  window.addEventListener('touchend', function() { dragging = false; });
+  // Pointer Events API — unifica mouse + touch, respeta touch-action:none del CSS
+  wrap.addEventListener('pointerdown', function(e) {
+    wrap.setPointerCapture(e.pointerId);
+    setPos(e.clientX);
+  });
+  wrap.addEventListener('pointermove', function(e) {
+    if (e.buttons === 0) return;
+    setPos(e.clientX);
+  });
 });
 </script>
 {% endblock %}
