@@ -220,7 +220,7 @@ def profesionales(request):
             'directora': True,
             'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, corte, visagismo, manejo de rulos, permanentes, alisados y tratamientos capilares.',
             'certificaciones': ['Schwarkprof', 'Moroccanoil'],
-            'fotos': [f'img/profesionales/dominique/dominique-{i:02d}.jpg' for i in range(1, 13)],
+            'fotos': [f'img/profesionales/dominique/dominique-{n}.jpg' for n in ['03','05','06','08','09','12']],
         },
         {
             'slug': 'danitza',
@@ -229,7 +229,7 @@ def profesionales(request):
             'directora': False,
             'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, técnicas de touca, corte, visagismo, alisados y tratamientos capilares.',
             'certificaciones': ['Redken', 'L\'Oréal', 'Richee'],
-            'fotos': [f'img/profesionales/danitza/danitza-{i:02d}.jpg' for i in range(1, 11)],
+            'fotos': [f'img/profesionales/danitza/danitza-{n}.jpg' for n in ['02','04','05','06','07','09']],
         },
         {
             'slug': 'angela',
