@@ -25,7 +25,7 @@ def home(request):
         {
             'titulo': 'Alisado Keratina',
             'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-04.jpg',
+            'antes': 'img/profesionales/dominique/dominique-04b.jpg',
             'despues': 'img/profesionales/dominique/dominique-03.jpg',
         },
         {
@@ -108,7 +108,7 @@ def transformaciones(request):
             'titulo': 'Alisado Keratina',
             'descripcion': 'Tratamiento alisado con keratina para brillo y suavidad extrema.',
             'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-04.jpg',
+            'antes': 'img/profesionales/dominique/dominique-04b.jpg',
             'despues': 'img/profesionales/dominique/dominique-03.jpg',
         },
         {
