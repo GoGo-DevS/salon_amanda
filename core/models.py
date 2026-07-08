@@ -57,6 +57,22 @@ class Producto(models.Model):
         return quote(f"Hola Salón Amanda, me interesa el producto: {self.nombre}")
 
 
+class Promocion(models.Model):
+    titulo      = models.CharField(max_length=120)
+    descripcion = models.TextField()
+    btn_texto   = models.CharField(max_length=60, default='Reservar ahora')
+    btn_url     = models.CharField(max_length=500, default='https://link.agendapro.com/cl/salonamanda/9581b2de')
+    activa      = models.BooleanField(default=True)
+    fecha_fin   = models.DateField(null=True, blank=True, help_text='Dejar vacío = sin vencimiento')
+
+    class Meta:
+        verbose_name = 'Promoción'
+        verbose_name_plural = 'Promociones'
+
+    def __str__(self):
+        return self.titulo
+
+
 class ProductoImagen(models.Model):
     producto = models.ForeignKey(Producto, related_name='imagenes', on_delete=models.CASCADE)
     imagen   = models.CharField(max_length=255, help_text='Ruta relativa en static')

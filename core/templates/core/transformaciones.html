@@ -1,0 +1,246 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Transformaciones — Salón Amanda{% endblock %}
+
+{% block extra_head %}
+<style>
+.transf-hero {
+  padding: 120px 0 56px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,191,200,.10) 0%, transparent 70%);
+}
+.transf-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.transf-hero p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ── GRID DE TRANSFORMACIONES ── */
+.transf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 60px 0 80px;
+}
+@media (max-width: 767px) {
+  .transf-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.transf-card {}
+.transf-meta {
+  margin-bottom: 14px;
+}
+.transf-titulo {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.transf-desc {
+  color: var(--text-muted);
+  font-size: .88rem;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+.transf-prof {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ── BEFORE/AFTER SLIDER ── */
+.ba-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+.ba-after {
+  position: absolute;
+  inset: 0;
+}
+.ba-after img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.ba-before {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  width: 50%;
+  will-change: width;
+}
+.ba-before img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  top: 0; left: 0;
+  /* match parent width to keep image correct */
+  min-width: 200%;
+  max-width: none;
+}
+
+.ba-handle {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: #fff;
+  transform: translateX(-50%);
+  will-change: left;
+  z-index: 10;
+}
+.ba-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.35);
+  font-size: 1.1rem;
+  color: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.ba-label {
+  position: absolute;
+  bottom: 14px;
+  font-family: var(--font-sans);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+.ba-label-antes {
+  left: 12px;
+  background: rgba(0,0,0,.55);
+  color: #fff;
+}
+.ba-label-despues {
+  right: 12px;
+  background: rgba(0,191,200,.85);
+  color: #0a0a0a;
+}
+
+/* CTA final */
+.transf-cta {
+  text-align: center;
+  padding: 0 0 80px;
+}
+.transf-cta p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="transf-hero">
+  <div class="container">
+    <div class="section-label">Resultados Reales</div>
+    <h1>Transformaciones</h1>
+    <p>Arrastra el divisor para ver el antes y después de cada clienta. Todo realizado en Salón Amanda.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="transf-grid">
+      {% for par in pares %}
+      <div class="transf-card reveal">
+
+        <div class="transf-meta">
+          <h2 class="transf-titulo">{{ par.titulo }}</h2>
+          <p class="transf-desc">{{ par.descripcion }}</p>
+          <span class="transf-prof">Por {{ par.profesional }}</span>
+        </div>
+
+        <div class="ba-wrap" data-ba>
+          <div class="ba-after">
+            <img src="{% static par.despues %}" alt="Después — {{ par.titulo }}" loading="lazy">
+          </div>
+          <div class="ba-before">
+            <img src="{% static par.antes %}" alt="Antes — {{ par.titulo }}" loading="lazy">
+          </div>
+          <div class="ba-handle">
+            <div class="ba-btn">⟺</div>
+          </div>
+          <span class="ba-label ba-label-antes">Antes</span>
+          <span class="ba-label ba-label-despues">Después</span>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="transf-cta">
+  <div class="container">
+    <p>¿Lista para tu transformación?</p>
+    <a href="https://link.agendapro.com/cl/salonamanda/9581b2de"
+       target="_blank" rel="noopener"
+       class="btn btn-dark navbar-cta" style="padding:14px 32px;font-size:1rem;">
+      Reservar mi hora
+    </a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.querySelectorAll('[data-ba]').forEach(function(wrap) {
+  var before = wrap.querySelector('.ba-before');
+  var handle = wrap.querySelector('.ba-handle');
+  var dragging = false;
+
+  function setPos(x) {
+    var rect = wrap.getBoundingClientRect();
+    var pct = Math.min(Math.max((x - rect.left) / rect.width, 0.02), 0.98);
+    var pxPct = (pct * 100).toFixed(2) + '%';
+    before.style.width = pxPct;
+    handle.style.left = pxPct;
+  }
+
+  wrap.addEventListener('mousedown', function(e) { dragging = true; setPos(e.clientX); });
+  window.addEventListener('mousemove', function(e) { if (dragging) setPos(e.clientX); });
+  window.addEventListener('mouseup', function() { dragging = false; });
+
+  wrap.addEventListener('touchstart', function(e) { dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchmove', function(e) { if (dragging) setPos(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchend', function() { dragging = false; });
+});
+</script>
+{% endblock %}

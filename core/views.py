@@ -54,6 +54,40 @@ def links(request):
     return render(request, 'core/links.html')
 
 
+def transformaciones(request):
+    pares = [
+        {
+            'titulo': 'Corrección de Color',
+            'descripcion': 'De naranja dañado a mechas ash naturales con ondas perfectas.',
+            'profesional': 'Danitza San Martín',
+            'antes': 'img/profesionales/danitza/danitza-03.jpg',
+            'despues': 'img/profesionales/danitza/danitza-04.jpg',
+        },
+        {
+            'titulo': 'Coloración & Ondas',
+            'descripcion': 'Coloración caramelo con efecto de volumen y movimiento natural.',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-07.jpg',
+            'despues': 'img/profesionales/dominique/dominique-08.jpg',
+        },
+        {
+            'titulo': 'Alisado Keratina',
+            'descripcion': 'Tratamiento alisado con keratina para brillo y suavidad extrema.',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-04.jpg',
+            'despues': 'img/profesionales/dominique/dominique-03.jpg',
+        },
+        {
+            'titulo': 'Platinado Premium',
+            'descripcion': 'Decoloración controlada con tonificación platinada en corte corto.',
+            'profesional': 'Dominique Castillo',
+            'antes': 'img/profesionales/dominique/dominique-11.jpg',
+            'despues': 'img/profesionales/dominique/dominique-12.jpg',
+        },
+    ]
+    return render(request, 'core/transformaciones.html', {'pares': pares})
+
+
 def profesionales(request):
     equipo = [
         {
