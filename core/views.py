@@ -14,30 +14,10 @@ def home(request):
     destacados = Producto.objects.filter(activo=True, destacado=True).exclude(sku__startswith='OSIS')[:8]
     osis_productos = Producto.objects.filter(activo=True, sku__startswith='OSIS')[:4]
     pares_transf = [
-        {
-            'titulo': 'Balayage Ash',
-            'profesional': 'Danitza San Martín',
-            'antes': 'img/transformaciones/danitza-a1.jpg',
-            'despues': 'img/transformaciones/danitza-a2.jpg',
-        },
-        {
-            'titulo': 'Rubio Platinado',
-            'profesional': 'Danitza San Martín',
-            'antes': 'img/transformaciones/danitza-b1.jpg',
-            'despues': 'img/transformaciones/danitza-b2.jpg',
-        },
-        {
-            'titulo': 'Coloración & Ondas',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/transformaciones/dominique-a1.jpg',
-            'despues': 'img/transformaciones/dominique-a2.jpg',
-        },
-        {
-            'titulo': 'Platinado Corto',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/transformaciones/dominique-b1.jpg',
-            'despues': 'img/transformaciones/dominique-b2.jpg',
-        },
+        {'antes': 'img/transformaciones/danitza-a1.jpg', 'despues': 'img/transformaciones/danitza-a2.jpg'},
+        {'antes': 'img/transformaciones/danitza-b1.jpg', 'despues': 'img/transformaciones/danitza-b2.jpg'},
+        {'antes': 'img/transformaciones/dominique-1antes.jpg', 'despues': 'img/transformaciones/dominique-1despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-2antes.jpg', 'despues': 'img/transformaciones/dominique-2despues.jpg'},
     ]
     hoy = timezone.now().date()
     promociones = Promocion.objects.filter(activa=True).filter(
@@ -94,38 +74,16 @@ def links(request):
 
 def transformaciones(request):
     pares = [
-        {
-            'antes': 'img/transformaciones/danitza-a1.jpg',
-            'despues': 'img/transformaciones/danitza-a2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/danitza-b1.jpg',
-            'despues': 'img/transformaciones/danitza-b2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/danitza-c1.jpg',
-            'despues': 'img/transformaciones/danitza-c2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/danitza-d1.jpg',
-            'despues': 'img/transformaciones/danitza-d2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/danitza-e1.jpg',
-            'despues': 'img/transformaciones/danitza-e2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/dominique-a1.jpg',
-            'despues': 'img/transformaciones/dominique-a2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/dominique-b1.jpg',
-            'despues': 'img/transformaciones/dominique-b2.jpg',
-        },
-        {
-            'antes': 'img/transformaciones/dominique-c1.jpg',
-            'despues': 'img/transformaciones/dominique-c2.jpg',
-        },
+        {'antes': 'img/transformaciones/danitza-a1.jpg', 'despues': 'img/transformaciones/danitza-a2.jpg'},
+        {'antes': 'img/transformaciones/danitza-b1.jpg', 'despues': 'img/transformaciones/danitza-b2.jpg'},
+        {'antes': 'img/transformaciones/danitza-c1.jpg', 'despues': 'img/transformaciones/danitza-c2.jpg'},
+        {'antes': 'img/transformaciones/danitza-d1.jpg', 'despues': 'img/transformaciones/danitza-d2.jpg'},
+        {'antes': 'img/transformaciones/dominique-1antes.jpg', 'despues': 'img/transformaciones/dominique-1despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-2antes.jpg', 'despues': 'img/transformaciones/dominique-2despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-3antes.jpg', 'despues': 'img/transformaciones/dominique-3despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-4antes.jpg', 'despues': 'img/transformaciones/dominique-4despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-5antes.jpg', 'despues': 'img/transformaciones/dominique-5despues.jpg'},
+        {'antes': 'img/transformaciones/dominique-6antes.jpg', 'despues': 'img/transformaciones/dominique-6despues.jpg'},
     ]
     return render(request, 'core/transformaciones.html', {'pares': pares})
 
@@ -225,12 +183,12 @@ def profesionales(request):
             'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, corte, visagismo, manejo de rulos, permanentes, alisados y tratamientos capilares.',
             'certificaciones': ['Schwarkprof', 'Moroccanoil'],
             'fotos': [
-                'img/profesionales/dominique/dominique-03.jpg',
-                'img/transformaciones/dominique-a2.jpg',
-                'img/profesionales/dominique/dominique-08.jpg',
-                'img/profesionales/dominique/dominique-09.jpg',
-                'img/transformaciones/dominique-c2.jpg',
-                'img/profesionales/dominique/dominique-12.jpg',
+                'img/transformaciones/dominique-1despues.jpg',
+                'img/transformaciones/dominique-2despues.jpg',
+                'img/transformaciones/dominique-3despues.jpg',
+                'img/transformaciones/dominique-4despues.jpg',
+                'img/transformaciones/dominique-5despues.jpg',
+                'img/transformaciones/dominique-6despues.jpg',
             ],
         },
         {
@@ -246,7 +204,6 @@ def profesionales(request):
                 'img/profesionales/danitza/danitza-05.jpg',
                 'img/profesionales/danitza/danitza-06.jpg',
                 'img/profesionales/danitza/danitza-07.jpg',
-                'img/transformaciones/danitza-e2.jpg',
             ],
         },
         {
