@@ -224,7 +224,14 @@ def profesionales(request):
             'directora': True,
             'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, corte, visagismo, manejo de rulos, permanentes, alisados y tratamientos capilares.',
             'certificaciones': ['Schwarkprof', 'Moroccanoil'],
-            'fotos': [f'img/profesionales/dominique/dominique-{n}.jpg' for n in ['03','05','06','08','09','12']],
+            'fotos': [
+                'img/profesionales/dominique/dominique-03.jpg',
+                'img/profesionales/dominique/dominique-05.jpg',
+                'img/transformaciones/dominique-c2.jpg',
+                'img/profesionales/dominique/dominique-08.jpg',
+                'img/profesionales/dominique/dominique-09.jpg',
+                'img/profesionales/dominique/dominique-12.jpg',
+            ],
         },
         {
             'slug': 'danitza',
