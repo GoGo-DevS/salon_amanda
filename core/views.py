@@ -15,28 +15,28 @@ def home(request):
     osis_productos = Producto.objects.filter(activo=True, sku__startswith='OSIS')[:4]
     pares_transf = [
         {
-            'titulo': 'Corrección de Color',
+            'titulo': 'Balayage Ash',
             'profesional': 'Danitza San Martín',
-            'antes': 'img/profesionales/danitza/danitza-03.jpg',
-            'despues': 'img/profesionales/danitza/danitza-04.jpg',
+            'antes': 'img/transformaciones/danitza-a1.jpg',
+            'despues': 'img/transformaciones/danitza-a2.jpg',
+        },
+        {
+            'titulo': 'Rubio Platinado',
+            'profesional': 'Danitza San Martín',
+            'antes': 'img/transformaciones/danitza-b1.jpg',
+            'despues': 'img/transformaciones/danitza-b2.jpg',
         },
         {
             'titulo': 'Coloración & Ondas',
             'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-07.jpg',
-            'despues': 'img/profesionales/dominique/dominique-08.jpg',
+            'antes': 'img/transformaciones/dominique-a1.jpg',
+            'despues': 'img/transformaciones/dominique-a2.jpg',
         },
         {
-            'titulo': 'Alisado Keratina',
+            'titulo': 'Platinado Corto',
             'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-04b.jpg',
-            'despues': 'img/profesionales/dominique/dominique-03.jpg',
-        },
-        {
-            'titulo': 'Platinado Premium',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-11.jpg',
-            'despues': 'img/profesionales/dominique/dominique-12.jpg',
+            'antes': 'img/transformaciones/dominique-b1.jpg',
+            'despues': 'img/transformaciones/dominique-b2.jpg',
         },
     ]
     hoy = timezone.now().date()
@@ -95,32 +95,36 @@ def links(request):
 def transformaciones(request):
     pares = [
         {
-            'titulo': 'Corrección de Color',
-            'descripcion': 'De naranja dañado a mechas ash naturales con ondas perfectas.',
-            'profesional': 'Danitza San Martín',
-            'antes': 'img/profesionales/danitza/danitza-03.jpg',
-            'despues': 'img/profesionales/danitza/danitza-04.jpg',
+            'antes': 'img/transformaciones/danitza-a1.jpg',
+            'despues': 'img/transformaciones/danitza-a2.jpg',
         },
         {
-            'titulo': 'Coloración & Ondas',
-            'descripcion': 'Coloración caramelo con efecto de volumen y movimiento natural.',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-07.jpg',
-            'despues': 'img/profesionales/dominique/dominique-08.jpg',
+            'antes': 'img/transformaciones/danitza-b1.jpg',
+            'despues': 'img/transformaciones/danitza-b2.jpg',
         },
         {
-            'titulo': 'Alisado Keratina',
-            'descripcion': 'Tratamiento alisado con keratina para brillo y suavidad extrema.',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-04b.jpg',
-            'despues': 'img/profesionales/dominique/dominique-03.jpg',
+            'antes': 'img/transformaciones/danitza-c1.jpg',
+            'despues': 'img/transformaciones/danitza-c2.jpg',
         },
         {
-            'titulo': 'Platinado Premium',
-            'descripcion': 'Decoloración controlada con tonificación platinada en corte corto.',
-            'profesional': 'Dominique Castillo',
-            'antes': 'img/profesionales/dominique/dominique-11.jpg',
-            'despues': 'img/profesionales/dominique/dominique-12.jpg',
+            'antes': 'img/transformaciones/danitza-d1.jpg',
+            'despues': 'img/transformaciones/danitza-d2.jpg',
+        },
+        {
+            'antes': 'img/transformaciones/danitza-e1.jpg',
+            'despues': 'img/transformaciones/danitza-e2.jpg',
+        },
+        {
+            'antes': 'img/transformaciones/dominique-a1.jpg',
+            'despues': 'img/transformaciones/dominique-a2.jpg',
+        },
+        {
+            'antes': 'img/transformaciones/dominique-b1.jpg',
+            'despues': 'img/transformaciones/dominique-b2.jpg',
+        },
+        {
+            'antes': 'img/transformaciones/dominique-c1.jpg',
+            'despues': 'img/transformaciones/dominique-c2.jpg',
         },
     ]
     return render(request, 'core/transformaciones.html', {'pares': pares})
