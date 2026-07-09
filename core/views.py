@@ -226,10 +226,10 @@ def profesionales(request):
             'certificaciones': ['Schwarkprof', 'Moroccanoil'],
             'fotos': [
                 'img/profesionales/dominique/dominique-03.jpg',
-                'img/profesionales/dominique/dominique-05.jpg',
-                'img/transformaciones/dominique-c2.jpg',
+                'img/transformaciones/dominique-a2.jpg',
                 'img/profesionales/dominique/dominique-08.jpg',
                 'img/profesionales/dominique/dominique-09.jpg',
+                'img/transformaciones/dominique-c2.jpg',
                 'img/profesionales/dominique/dominique-12.jpg',
             ],
         },
@@ -240,7 +240,14 @@ def profesionales(request):
             'directora': False,
             'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, técnicas de touca, corte, visagismo, alisados y tratamientos capilares.',
             'certificaciones': ['Redken', 'L\'Oréal', 'Richee'],
-            'fotos': [f'img/profesionales/danitza/danitza-{n}.jpg' for n in ['02','04','05','06','07','09']],
+            'fotos': [
+                'img/profesionales/danitza/danitza-02.jpg',
+                'img/profesionales/danitza/danitza-04.jpg',
+                'img/profesionales/danitza/danitza-05.jpg',
+                'img/profesionales/danitza/danitza-06.jpg',
+                'img/profesionales/danitza/danitza-07.jpg',
+                'img/transformaciones/danitza-e2.jpg',
+            ],
         },
         {
             'slug': 'angela',
