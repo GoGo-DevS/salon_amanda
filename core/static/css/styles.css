@@ -979,6 +979,8 @@ img.product-img-placeholder {
     background: #000;
     box-shadow: var(--shadow-sm);
     line-height: 0;
+    position: relative;
+    cursor: pointer;
 }
 .evento-img {
     width: 100%;
@@ -992,6 +994,105 @@ img.product-img-placeholder {
     object-fit: cover;
     display: block;
     background: #000;
+    pointer-events: none;
+}
+/* Fix 9:16 → no se deforma en pantalla completa desktop */
+.evento-video:-webkit-full-screen { object-fit: contain; background: #000; }
+.evento-video:-moz-full-screen    { object-fit: contain; background: #000; }
+.evento-video:fullscreen          { object-fit: contain; background: #000; }
+
+/* Hover overlay en cards de eventos */
+.evento-play-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 2rem; opacity: 0;
+    transition: background .22s, opacity .22s;
+    pointer-events: none;
+}
+.evento-media-card:hover .evento-play-overlay {
+    background: rgba(0,0,0,.35);
+    opacity: 1;
+}
+
+/* ── Lightbox eventos ─────────────────────────────────────────── */
+#eventosLightbox {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,.93);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 1rem;
+}
+#eventosLightbox.lb-active { display: flex; }
+#lbLayout {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    max-height: 90vh;
+}
+#lbMediaWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#lbMediaWrap img {
+    max-height: 86vh;
+    max-width: min(82vw, 500px);
+    width: auto;
+    border-radius: 12px;
+    display: block;
+    object-fit: contain;
+    background: #000;
+}
+#lbMediaWrap video {
+    max-height: 86vh;
+    max-width: min(82vw, calc(86vh * 9 / 16));
+    width: auto;
+    border-radius: 12px;
+    display: block;
+    background: #000;
+}
+/* Pantalla completa del video dentro del lightbox */
+#lbMediaWrap video:-webkit-full-screen { object-fit: contain; background: #000; }
+#lbMediaWrap video:-moz-full-screen    { object-fit: contain; background: #000; }
+#lbMediaWrap video:fullscreen          { object-fit: contain; background: #000; }
+.lb-nav-btn {
+    flex-shrink: 0;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.55rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .18s;
+    line-height: 1;
+    padding: 0;
+}
+.lb-nav-btn:hover { background: rgba(255,255,255,.28); }
+.lb-nav-btn:disabled { opacity: .25; cursor: default; }
+#lbClose {
+    position: fixed; top: 1rem; right: 1rem;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10001;
+    transition: background .18s;
+}
+#lbClose:hover { background: rgba(255,255,255,.28); }
+#lbCounter {
+    position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,.55);
+    font-size: .82rem;
+    letter-spacing: .06em;
+    pointer-events: none;
 }
 
 /* ============================================================

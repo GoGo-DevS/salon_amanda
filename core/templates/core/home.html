@@ -785,38 +785,64 @@ document.querySelectorAll('[data-ba]').forEach(function(wrap){
 
         <div class="row g-4 justify-content-center reveal">
             <div class="col-6 col-md-4 col-lg-2half">
-                <div class="evento-media-card">
+                <div class="evento-media-card evento-lightbox-trigger"
+                     data-type="photo"
+                     data-src="{% static 'img/eventos/evento-foto-1.jpg' %}">
                     <img src="{% static 'img/eventos/evento-foto-1.jpg' %}" alt="Evento Salón Amanda" class="evento-img">
+                    <div class="evento-play-overlay"><i class="bi bi-eye"></i></div>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-2half">
-                <div class="evento-media-card">
-                    <video autoplay muted loop playsinline controls class="evento-video">
+                <div class="evento-media-card evento-lightbox-trigger"
+                     data-type="video"
+                     data-src="{% static 'videos/eventos/evento-video-1.mp4' %}">
+                    <video autoplay muted loop playsinline class="evento-video">
                         <source src="{% static 'videos/eventos/evento-video-1.mp4' %}" type="video/mp4">
                     </video>
+                    <div class="evento-play-overlay"><i class="bi bi-play-circle"></i></div>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-2half">
-                <div class="evento-media-card">
-                    <video autoplay muted loop playsinline controls class="evento-video">
+                <div class="evento-media-card evento-lightbox-trigger"
+                     data-type="video"
+                     data-src="{% static 'videos/eventos/evento-video-2.mp4' %}">
+                    <video autoplay muted loop playsinline class="evento-video">
                         <source src="{% static 'videos/eventos/evento-video-2.mp4' %}" type="video/mp4">
                     </video>
+                    <div class="evento-play-overlay"><i class="bi bi-play-circle"></i></div>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-2half">
-                <div class="evento-media-card">
-                    <video autoplay muted loop playsinline controls class="evento-video">
+                <div class="evento-media-card evento-lightbox-trigger"
+                     data-type="video"
+                     data-src="{% static 'videos/eventos/evento-video-3.mp4' %}">
+                    <video autoplay muted loop playsinline class="evento-video">
                         <source src="{% static 'videos/eventos/evento-video-3.mp4' %}" type="video/mp4">
                     </video>
+                    <div class="evento-play-overlay"><i class="bi bi-play-circle"></i></div>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg-2half">
-                <div class="evento-media-card">
-                    <video autoplay muted loop playsinline controls class="evento-video">
+                <div class="evento-media-card evento-lightbox-trigger"
+                     data-type="video"
+                     data-src="{% static 'videos/eventos/evento-video-4.mp4' %}">
+                    <video autoplay muted loop playsinline class="evento-video">
                         <source src="{% static 'videos/eventos/evento-video-4.mp4' %}" type="video/mp4">
                     </video>
+                    <div class="evento-play-overlay"><i class="bi bi-play-circle"></i></div>
                 </div>
             </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="eventosLightbox" role="dialog" aria-modal="true" aria-label="Galería de eventos">
+            <button id="lbClose" aria-label="Cerrar">✕</button>
+            <div id="lbLayout">
+                <button class="lb-nav-btn" id="lbPrev" aria-label="Anterior">&#8249;</button>
+                <div id="lbMediaWrap"></div>
+                <button class="lb-nav-btn" id="lbNext" aria-label="Siguiente">&#8250;</button>
+            </div>
+            <div id="lbCounter"></div>
         </div>
 
         <p class="showcase-note reveal mt-4">
@@ -888,5 +914,76 @@ document.querySelectorAll('[data-ba]').forEach(function(wrap){
         </div>
     </div>
 </section>
+
+<script>
+(function () {
+  var items = [];
+  var current = 0;
+  var lb      = document.getElementById('eventosLightbox');
+  var wrap    = document.getElementById('lbMediaWrap');
+  var counter = document.getElementById('lbCounter');
+  var btnPrev = document.getElementById('lbPrev');
+  var btnNext = document.getElementById('lbNext');
+
+  document.querySelectorAll('.evento-lightbox-trigger').forEach(function (el, i) {
+    items.push({ type: el.getAttribute('data-type'), src: el.getAttribute('data-src') });
+    el.addEventListener('click', function () { openLb(i); });
+  });
+
+  function stopVideo() {
+    var v = wrap.querySelector('video');
+    if (v) { v.pause(); v.src = ''; }
+  }
+
+  function render() {
+    stopVideo();
+    wrap.innerHTML = '';
+    var item = items[current];
+    if (item.type === 'video') {
+      var v = document.createElement('video');
+      v.src = item.src;
+      v.controls = true;
+      v.autoplay = true;
+      v.playsInline = true;
+      wrap.appendChild(v);
+    } else {
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = 'Evento Salón Amanda';
+      wrap.appendChild(img);
+    }
+    counter.textContent = (current + 1) + ' / ' + items.length;
+    btnPrev.disabled = (current === 0);
+    btnNext.disabled = (current === items.length - 1);
+  }
+
+  function openLb(idx) {
+    current = idx;
+    lb.classList.add('lb-active');
+    document.body.style.overflow = 'hidden';
+    render();
+  }
+
+  function closeLb() {
+    stopVideo();
+    lb.classList.remove('lb-active');
+    document.body.style.overflow = '';
+    wrap.innerHTML = '';
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+
+  btnPrev.addEventListener('click', function () { if (current > 0) { current--; render(); } });
+  btnNext.addEventListener('click', function () { if (current < items.length - 1) { current++; render(); } });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('lb-active')) return;
+    if (e.key === 'Escape')      { closeLb(); }
+    if (e.key === 'ArrowLeft'  && current > 0)              { current--; render(); }
+    if (e.key === 'ArrowRight' && current < items.length - 1) { current++; render(); }
+  });
+})();
+</script>
 
 {% endblock %}
