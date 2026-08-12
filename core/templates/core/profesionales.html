@@ -52,6 +52,18 @@
   display: block;
   box-shadow: 0 12px 40px rgba(0,0,0,.18);
 }
+/* Mientras Sergio no mande la foto de alguien nuevo del equipo: mismo marco
+   que .prof-photo, con su inicial en vez de una imagen rota. */
+.prof-photo-inicial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--color-teal) 0%, var(--color-gold) 100%);
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+}
 .badge-directora {
   position: absolute;
   top: 16px;
@@ -225,9 +237,13 @@
         <!-- Foto perfil -->
         <div class="col-lg-5 col-md-5 col-7 mx-auto" style="max-width:340px;">
           <div class="prof-photo-wrap">
-            <img src="{% static 'img/profesionales/'|add:p.slug|add:'-perfil.jpg' %}"
-                 alt="{{ p.nombre }}"
-                 class="prof-photo reveal">
+            {% if p.tiene_foto %}
+              <img src="{% static 'img/profesionales/'|add:p.slug|add:'-perfil.jpg' %}"
+                   alt="{{ p.nombre }}"
+                   class="prof-photo reveal">
+            {% else %}
+              <div class="prof-photo prof-photo-inicial reveal">{{ p.nombre|first }}</div>
+            {% endif %}
           </div>
         </div>
 

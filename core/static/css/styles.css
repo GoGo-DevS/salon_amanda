@@ -527,6 +527,19 @@ section { padding: 6rem 0; }
     display: block;
 }
 
+/* Mientras no llegue la foto de alguien nuevo del equipo: mismo marco que
+   .team-photo, con su inicial en vez de una imagen rota. */
+.team-photo-inicial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, var(--color-teal) 0%, var(--color-gold) 100%);
+    color: var(--color-white);
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
 .team-name {
     font-size: 1.2rem;
     font-weight: 600;

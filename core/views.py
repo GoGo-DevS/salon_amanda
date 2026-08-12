@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.staticfiles import finders
 from django.core.paginator import Paginator
 from django.db import models
 from django.shortcuts import get_object_or_404, redirect, render
@@ -192,19 +193,19 @@ def profesionales(request):
             ],
         },
         {
-            'slug': 'danitza',
-            'nombre': 'Danitza San Martín',
+            # Danitza y Estefanía ya no trabajan en el salón (Sergio, WhatsApp
+            # 11-08-2026: "Danitza y Estefania eliminar"). Reemplazadas por
+            # Paola González y Fabiola Mansilla, mismos dos roles. Sergio
+            # avisó que por ahora van sin fotos (son nuevas en el salón) —
+            # `tiene_foto` abajo hace que el template caiga a un avatar con
+            # iniciales en vez de mostrar una imagen rota mientras tanto.
+            'slug': 'paola',
+            'nombre': 'Paola González',
             'titulo': 'Colorista Senior',
             'directora': False,
-            'descripcion': 'Especialista en coloración, técnicas avanzadas de color, decoloración, técnicas de touca, corte, visagismo, alisados y tratamientos capilares.',
-            'certificaciones': ['Redken', 'L\'Oréal', 'Richee'],
-            'fotos': [
-                'img/profesionales/danitza/danitza-02.jpg',
-                'img/profesionales/danitza/danitza-04.jpg',
-                'img/profesionales/danitza/danitza-05.jpg',
-                'img/profesionales/danitza/danitza-06.jpg',
-                'img/profesionales/danitza/danitza-07.jpg',
-            ],
+            'descripcion': 'Especialista en Coloración, técnica avanzada de color, decoloración, cortes, visagismo, Alisados y tratamientos capilares.',
+            'certificaciones': ['Redken'],
+            'fotos': [],
         },
         {
             'slug': 'angela',
@@ -216,13 +217,16 @@ def profesionales(request):
             'fotos': [f'img/profesionales/angela/angela-{i:02d}.jpg' for i in range(1, 7)],
         },
         {
-            'slug': 'estefania',
-            'nombre': 'Estefanía Padilla',
-            'titulo': 'Cosmetóloga & Nail Art',
+            'slug': 'fabiola',
+            'nombre': 'Fabiola Mansilla',
+            'titulo': 'Cosmetóloga y Nail Art',
             'directora': False,
-            'descripcion': 'Especialista en extensión con acrílico, soft gel, nivelación, esmaltado Semi-Permanente, diseños y depilación con cera.',
+            'descripcion': 'Extensión Soft Gel, nivelación, esmaltado Semi-Permanente, diseños y depilación con cera.',
             'certificaciones': [],
-            'fotos': [f'img/profesionales/estefania/estefania-{i:02d}.jpg' for i in range(1, 7)],
+            'fotos': [],
         },
     ]
+    for persona in equipo:
+        persona['tiene_foto'] = bool(
+            finders.find(f"img/profesionales/{persona['slug']}-perfil.jpg"))
     return render(request, 'core/profesionales.html', {'equipo': equipo})
