@@ -217,11 +217,15 @@ def profesionales(request):
             'fotos': [f'img/profesionales/angela/angela-{i:02d}.jpg' for i in range(1, 7)],
         },
         {
-            'slug': 'fabiola',
-            'nombre': 'Fabiola Mansilla',
-            'titulo': 'Cosmetóloga y Nail Art',
+            # Fabiola ya no trabaja en el salón (Sergio, WhatsApp 15-09-2026).
+            # Entra Evelyn Inglés: "los mismos servicios que Paola y además los
+            # que realiza Angela". Su foto de perfil es el logo del salón hasta
+            # que Sergio mande una suya: basta reemplazar evelyn-perfil.jpg.
+            'slug': 'evelyn',
+            'nombre': 'Evelyn Inglés',
+            'titulo': 'Colorista, Nail Art & Lash Lifting',
             'directora': False,
-            'descripcion': 'Extensión Soft Gel, nivelación, esmaltado Semi-Permanente, diseños y depilación con cera.',
+            'descripcion': 'Coloración, técnica avanzada de color, decoloración, cortes, visagismo, alisados y tratamientos capilares. Además esmaltado Semi-Permanente, extensión con soft gel, nivelación y Lash Lifting tradicional y técnica coreana.',
             'certificaciones': [],
             'fotos': [],
         },
