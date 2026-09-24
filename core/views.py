@@ -225,7 +225,7 @@ def profesionales(request):
             'nombre': 'Evelyn Inglés',
             'titulo': 'Colorista, Nail Art & Lash Lifting',
             'directora': False,
-            'descripcion': 'Coloración, técnica avanzada de color, decoloración, cortes, visagismo, alisados y tratamientos capilares. Además esmaltado Semi-Permanente, extensión con soft gel, nivelación y Lash Lifting tradicional y técnica coreana.',
+            'descripcion': 'Coloración, técnica avanzada de color, decoloración, alisados y tratamientos capilares. Además esmaltado Semi-Permanente, extensión con soft gel, nivelación y Lash Lifting tradicional y técnica coreana.',
             'certificaciones': [],
             'fotos': [],
         },
