@@ -6,6 +6,8 @@ services:
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py importar_productos && python manage.py ensure_superuser
     startCommand: gunicorn config.wsgi:application --workers 2 --bind 0.0.0.0:$PORT
     envVars:
+      - key: GA4_MEASUREMENT_ID
+        sync: false   # el G-XXXXXXXXXX de Google Analytics. VACIO = el sitio no mide ni llama a Google
       - key: DEBUG
         value: false
       - key: SECRET_KEY
