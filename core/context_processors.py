@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 from .models import Promocion
@@ -12,4 +13,4 @@ def promocion_activa(request):
         .order_by('-id')
         .first()
     )
-    return {'promo_activa': promo}
+    return {'promo_activa': promo, 'ga4_id': settings.GA4_MEASUREMENT_ID}

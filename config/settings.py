@@ -16,6 +16,11 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL', '')
+
+# Google Analytics 4. VACIO = no se carga nada, ni una peticion a Google.
+# Solo lo hereda core/templates/core/base.html. El panel tiene plantilla propia
+# A PROPOSITO: ahi se ven los datos de las clientas, y no van a Google.
+GA4_MEASUREMENT_ID = os.environ.get('GA4_MEASUREMENT_ID', '').strip()
 if CLOUDINARY_URL:
     import cloudinary
     cloudinary.config(cloudinary_url=CLOUDINARY_URL)
