@@ -124,6 +124,20 @@
       text-decoration: none;
     }
   </style>
+  {% comment %}
+    GA4 tambien en el Tree. Esta pagina no hereda la base, asi que antes
+    no la tenia y las visitas desde la bio de Instagram no se contaban.
+    Mismo bloque que la base: sin la variable no se carga nada.
+  {% endcomment %}
+  {% if ga4_id %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga4_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ ga4_id }}');
+  </script>
+  {% endif %}
 </head>
 <body>
 
@@ -208,5 +222,52 @@
     Web por <a href="https://gogodevs.cl" target="_blank">GoGoDevS</a>
   </p>
 
+{% if ga4_id %}
+  <script>
+    /* GoGoDevS Tree: cada boton que se aprieta en esta pagina se manda a GA4
+       como evento "tree_click" con el parametro "destino" (whatsapp,
+       instagram, interno:/catalogo/ ...). Sin esto GA solo cuenta los clics
+       que salen del sitio y no dice a cual boton fueron.
+       gtag se busca AL HACER CLIC, no al cargar: si GA no esta configurado
+       (local, o sin la variable) el script no hace nada. */
+    (function () {
+      var reglas = [
+        [/wa\.me|whatsapp\.com/i, 'whatsapp'],
+        [/instagram\.com/i, 'instagram'],
+        [/tiktok\.com/i, 'tiktok'],
+        [/facebook\.com|fb\.me/i, 'facebook'],
+        [/youtube\.com|youtu\.be/i, 'youtube'],
+        [/linkedin\.com/i, 'linkedin'],
+        [/mercadolibre\./i, 'mercadolibre'],
+        [/agendapro\./i, 'agendapro'],
+        [/google\.[a-z.]+\/maps|maps\.app\.goo|goo\.gl\/maps|maps\.google/i, 'mapa'],
+        [/^mailto:/i, 'correo'],
+        [/^tel:/i, 'telefono']
+      ];
+      function destino(a) {
+        if (a.getAttribute('data-destino')) return a.getAttribute('data-destino');
+        var href = a.getAttribute('href') || '';
+        for (var i = 0; i < reglas.length; i++) {
+          if (reglas[i][0].test(href)) return reglas[i][1];
+        }
+        try {
+          var u = new URL(href, window.location.href);
+          if (u.host === window.location.host) return 'interno:' + u.pathname;
+        } catch (e) {}
+        return 'externo';
+      }
+      document.addEventListener('click', function (ev) {
+        if (typeof window.gtag !== 'function' || !ev.target.closest) return;
+        var a = ev.target.closest('a[href]');
+        if (!a) return;
+        window.gtag('event', 'tree_click', {
+          destino: destino(a),
+          texto_boton: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60),
+          transport_type: 'beacon'
+        });
+      }, true);
+    })();
+  </script>
+{% endif %}
 </body>
 </html>
