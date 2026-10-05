@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db import transaction
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles import finders
@@ -128,10 +129,43 @@ def panel_promo_crear(request):
             fecha_fin=request.POST.get('fecha_fin') or None,
             activa=bool(request.POST.get('activa')),
         )
-        if request.FILES.get('imagen'):
-            promo.imagen = request.FILES['imagen']
-        promo.save()
-        messages.success(request, 'Promoción creada correctamente.')
+        # 05-10-2026: guardar con foto devolvia Server Error (500) y la
+        # promocion NO se creaba. La subida es lo unico que puede fallar aca
+        # --el resto son campos de texto-- y hasta hoy ninguna imagen se habia
+        # subido nunca desde el panel en produccion: las 48 del sitio vienen
+        # del repositorio, o sea este camino jamas se habia ejercitado.
+        #
+        # Lo que NO puede pasar es que el cliente vea una pagina de error y
+        # pierda lo que escribio. La promocion se guarda igual, SIN la foto, y
+        # el panel dice que la foto no subio. Una promo sin imagen se publica
+        # bien (la plantilla ya la hace opcional); una pagina de error no.
+        archivo = request.FILES.get('imagen')
+        fallo_imagen = ''
+        if archivo:
+            try:
+                # Savepoint propio: si el guardado falla a mitad, la conexión
+                # queda en estado de error y cualquier query siguiente muere
+                # con "You can't execute queries until the end of the 'atomic'
+                # block". Con el savepoint se revierte solo este intento.
+                with transaction.atomic():
+                    promo.imagen = archivo
+                    promo.save()
+            except Exception as e:            # noqa: BLE001 — el motivo se muestra
+                fallo_imagen = str(e)[:200]
+                promo.pk = None
+                promo.imagen = ''     # '' vacía el FileField; None lo deja a medias
+                promo.save()
+        else:
+            promo.save()
+
+        if fallo_imagen:
+            messages.success(request, 'Promoción creada, pero SIN la foto.')
+            messages.warning(
+                request, 'La foto no se pudo subir: %s. La promoción ya está '
+                         'publicada con su texto; vuelve a intentar la imagen '
+                         'desde "Editar".' % fallo_imagen)
+        else:
+            messages.success(request, 'Promoción creada correctamente.')
         return redirect('panel_dashboard')
     return render(request, 'core/panel/promo_form.html', {'promo': None})
 
@@ -146,10 +180,31 @@ def panel_promo_editar(request, pk):
         promo.btn_url = request.POST.get('btn_url', '').strip()
         promo.fecha_fin = request.POST.get('fecha_fin') or None
         promo.activa = bool(request.POST.get('activa'))
-        if request.FILES.get('imagen'):
-            promo.imagen = request.FILES['imagen']
-        promo.save()
-        messages.success(request, 'Promoción actualizada.')
+        # Igual que al crear: la foto es lo unico que puede reventar, y esta
+        # es la pantalla donde se vuelve a intentar despues de que fallo. Si
+        # aca tambien diera 500, se perderian ademas los cambios de texto.
+        archivo = request.FILES.get('imagen')
+        fallo_imagen = ''
+        if archivo:
+            anterior = promo.imagen
+            try:
+                with transaction.atomic():    # savepoint, ver el comentario al crear
+                    promo.imagen = archivo
+                    promo.save()
+            except Exception as e:            # noqa: BLE001 — el motivo se muestra
+                fallo_imagen = str(e)[:200]
+                # Se repone la que ya tenía: un intento fallido no puede
+                # dejarla sin la foto que sí estaba publicada.
+                promo.imagen = anterior
+                promo.save()
+        else:
+            promo.save()
+
+        if fallo_imagen:
+            messages.success(request, 'Promoción actualizada (sin cambiar la foto).')
+            messages.warning(request, 'La foto no se pudo subir: %s' % fallo_imagen)
+        else:
+            messages.success(request, 'Promoción actualizada.')
         return redirect('panel_dashboard')
     return render(request, 'core/panel/promo_form.html', {'promo': promo})
 
