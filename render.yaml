@@ -46,3 +46,12 @@ services:
       # alcanza: salva la foto pero no la fila de la promocion.
       - key: DATABASE_URL
         sync: false
+
+      # La cuenta del panel de Sergio. Estuvo ESCRITA en ensure_superuser.py, y
+      # este repo es PUBLICO: la clave de un superusuario quedo a la vista en
+      # raw.githubusercontent.com (medido 05-10-2026). Sin PANEL_PASSWORD el
+      # comando no crea la cuenta, y si ya existe no la toca.
+      - key: PANEL_USERNAME
+        sync: false
+      - key: PANEL_PASSWORD
+        sync: false
