@@ -15,7 +15,8 @@ def _cargar(**entorno):
     """Importa settings de nuevo con ese entorno y devuelve el modulo."""
     base = {k: '' for k in (
         'R2_BUCKET_NAME', 'R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID',
-        'R2_SECRET_ACCESS_KEY', 'R2_PUBLIC_DOMAIN', 'CLOUDINARY_URL')}
+        'R2_SECRET_ACCESS_KEY', 'R2_PUBLIC_DOMAIN', 'CLOUDINARY_URL',
+        'DATABASE_URL')}
     base.update(entorno)
     with mock.patch.dict(os.environ, base, clear=False):
         import config.settings as s
@@ -82,3 +83,21 @@ class EleccionDeStorage(SimpleTestCase):
     def tearDownClass(cls):
         _cargar()          # deja settings como estaba para el resto de la suite
         super().tearDownClass()
+
+
+class EleccionDeBase(SimpleTestCase):
+    """Sin DATABASE_URL el sitio sigue andando con SQLite (desarrollo local);
+    con ella usa Postgres. Y conn_max_age tiene que ser 0: con 600 Neon nunca
+    suspende y factura 24 h por dia, que es lo que le paso a Punto Parcelas."""
+
+    def test_sin_DATABASE_URL_usa_sqlite(self):
+        s = _cargar()
+        self.assertIn('sqlite3', s.DATABASES['default']['ENGINE'])
+
+    def test_con_DATABASE_URL_usa_postgres(self):
+        s = _cargar(DATABASE_URL='postgres://u:p@host.neon.tech/db')
+        self.assertIn('postgresql', s.DATABASES['default']['ENGINE'])
+
+    def test_conn_max_age_es_CERO_para_no_quemar_Neon(self):
+        s = _cargar(DATABASE_URL='postgres://u:p@host.neon.tech/db')
+        self.assertEqual(s.DATABASES['default'].get('CONN_MAX_AGE'), 0)

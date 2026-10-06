@@ -86,12 +86,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Con SQLite dentro del contenedor, en Render free TODO lo que Sergio carga
+# desde su panel se borra en el siguiente despliegue: el contenedor se recrea y
+# el archivo se va con el. Por eso las promociones nunca duraron.
+#
+# conn_max_age=0 NO es un descuido: Neon no suspende mientras haya una conexion
+# abierta, asi que con 600 la conexion se renueva antes de expirar y el reloj no
+# para nunca -- a Punto Parcelas le facturaba 24 horas por dia y llego al 80%
+# del plan gratis. Con 0 se reabre en cada request y el pooler absorbe el costo.
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
+if DATABASE_URL:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=0)}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

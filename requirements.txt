@@ -6,3 +6,5 @@ Pillow>=10.0.0
 cloudinary>=1.36.0
 django-cloudinary-storage>=0.3.0
 django-storages[s3]>=1.14.2
+dj-database-url>=2.1.0
+psycopg[binary]>=3.1
