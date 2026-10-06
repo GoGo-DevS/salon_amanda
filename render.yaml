@@ -2,10 +2,13 @@ services:
   - type: web
     name: salon-amanda
     env: python
-    # OJO: el servicio REAL no esta en free (Diego, 05-10-2026). Este archivo
-    # quedo desactualizado. Un sync del Blueprint con esta linea lo BAJARIA a
-    # free, y en free Render no permite discos ni mantiene nada entre deploys.
-    # Confirmar el plan verdadero en el panel y corregir esta linea.
+    # free DE VERDAD, medido en el panel de Render el 05-10-2026: plan Free $0,
+    # sin disco (free no los permite) y sin DATABASE_URL, o sea SQLite dentro
+    # del contenedor. Consecuencia: todo lo que Sergio cargue desde su panel
+    # --promociones incluidas-- se borra en el siguiente despliegue.
+    # Mover las fotos a R2 NO alcanza por si solo: la foto sobrevive pero la
+    # fila de la promo no, y queda un archivo huerfano. Para que su panel sirva
+    # hace falta ademas una base que persista (Postgres), no solo storage.
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py importar_productos && python manage.py ensure_superuser
     startCommand: gunicorn config.wsgi:application --workers 2 --bind 0.0.0.0:$PORT
