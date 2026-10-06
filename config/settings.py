@@ -15,6 +15,23 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
+# Las fotos que Sergio sube desde su panel (las promociones) viven aca.
+# R2 gana sobre Cloudinary: Cloudinary cobra por SERVIR, asi que la cuenta se
+# agota justo cuando al cliente le va bien -- ya paso dos veces y el 20-08 dejo
+# a Punto Parcelas sin una sola foto. R2 no cobra egreso nunca.
+R2_BUCKET_NAME = os.environ.get('R2_BUCKET_NAME', '')
+R2_ACCOUNT_ID = os.environ.get('R2_ACCOUNT_ID', '')
+R2_ACCESS_KEY_ID = os.environ.get('R2_ACCESS_KEY_ID', '')
+R2_SECRET_ACCESS_KEY = os.environ.get('R2_SECRET_ACCESS_KEY', '')
+R2_PUBLIC_DOMAIN = os.environ.get('R2_PUBLIC_DOMAIN', '')
+
+# Se exigen las CUATRO, no solo el bucket. Con el bucket puesto y el account id
+# vacio el endpoint queda en "https://.r2.cloudflarestorage.com" y boto3 revienta
+# al primer archivo que toque: el sitio entero cae con 502 y el motivo no aparece
+# en ninguna parte. Faltando alguna se cae a Cloudinary o a disco, que es
+# degradarse y no morir.
+USAR_R2 = bool(R2_BUCKET_NAME and R2_ACCOUNT_ID and R2_ACCESS_KEY_ID and R2_SECRET_ACCESS_KEY)
+
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL', '')
 
 # Google Analytics 4. VACIO = no se carga nada, ni una peticion a Google.
@@ -32,7 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    *(["cloudinary_storage", "cloudinary"] if CLOUDINARY_URL else []),
+    *(["storages"] if USAR_R2 else []),
+    *(["cloudinary_storage", "cloudinary"] if CLOUDINARY_URL and not USAR_R2 else []),
     'core',
 ]
 
@@ -98,7 +116,18 @@ _storages: dict = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-if CLOUDINARY_URL:
+if USAR_R2:
+    AWS_ACCESS_KEY_ID = R2_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = R2_SECRET_ACCESS_KEY
+    AWS_STORAGE_BUCKET_NAME = R2_BUCKET_NAME
+    AWS_S3_ENDPOINT_URL = f'https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com'
+    AWS_S3_CUSTOM_DOMAIN = R2_PUBLIC_DOMAIN  # pub-xxxx.r2.dev, SIN https://
+    AWS_S3_REGION_NAME = 'auto'
+    AWS_DEFAULT_ACL = None
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False
+    _storages["default"] = {"BACKEND": "storages.backends.s3.S3Storage"}
+elif CLOUDINARY_URL:
     _storages["default"] = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     }

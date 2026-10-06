@@ -2,6 +2,10 @@ services:
   - type: web
     name: salon-amanda
     env: python
+    # OJO: el servicio REAL no esta en free (Diego, 05-10-2026). Este archivo
+    # quedo desactualizado. Un sync del Blueprint con esta linea lo BAJARIA a
+    # free, y en free Render no permite discos ni mantiene nada entre deploys.
+    # Confirmar el plan verdadero en el panel y corregir esta linea.
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate && python manage.py importar_productos && python manage.py ensure_superuser
     startCommand: gunicorn config.wsgi:application --workers 2 --bind 0.0.0.0:$PORT
@@ -14,3 +18,22 @@ services:
         generateValue: true
       - key: PYTHON_VERSION
         value: "3.11.0"
+
+      # Las fotos que Sergio sube desde su panel (promociones). R2 gana sobre
+      # Cloudinary porque Cloudinary cobra por SERVIR: la cuenta se agota justo
+      # cuando al cliente le va bien. Se exigen las CUATRO -- con el bucket
+      # puesto y el account id vacio, boto3 revienta y el sitio cae con 502.
+      # ORDEN: correr "manage.py migrar_media_r2 --confirmar" ANTES de poner
+      # estas variables. Al reves, el sitio le pide las fotos a un bucket vacio.
+      - key: R2_BUCKET_NAME
+        sync: false
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_PUBLIC_DOMAIN
+        sync: false   # pub-xxxx.r2.dev, SIN https://
+      - key: CLOUDINARY_URL
+        sync: false   # queda de respaldo; si R2 esta completo, no se usa
