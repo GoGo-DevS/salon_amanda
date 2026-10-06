@@ -40,3 +40,9 @@ services:
         sync: false   # pub-xxxx.r2.dev, SIN https://
       - key: CLOUDINARY_URL
         sync: false   # queda de respaldo; si R2 esta completo, no se usa
+
+      # Postgres (Neon free). SIN esto el sitio usa SQLite dentro del contenedor
+      # y todo lo que Sergio carga se borra en el proximo deploy. R2 solo no
+      # alcanza: salva la foto pero no la fila de la promocion.
+      - key: DATABASE_URL
+        sync: false
