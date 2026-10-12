@@ -25,7 +25,10 @@ def _cargar(**entorno):
 
 LAS_CUATRO = dict(
     R2_BUCKET_NAME='salonamanda', R2_ACCOUNT_ID='abc123',
-    R2_ACCESS_KEY_ID='key', R2_SECRET_ACCESS_KEY='secreto')
+    R2_ACCESS_KEY_ID='key', R2_SECRET_ACCESS_KEY='secreto',
+    # Se llama LAS_CUATRO por historia; desde el 12-10-2026 son cinco: sin el
+    # dominio publico las URLs apuntan al endpoint privado y no abre ninguna foto.
+    R2_PUBLIC_DOMAIN='pub-prueba.r2.dev')
 
 
 class EleccionDeStorage(SimpleTestCase):
@@ -70,7 +73,10 @@ class EleccionDeStorage(SimpleTestCase):
     def test_sin_nada_cae_a_disco_y_no_revienta(self):
         s = _cargar()
         self.assertFalse(s.USAR_R2)
-        self.assertNotIn('default', s.STORAGES)   # Django pone el de disco solo
+        # Django NO pone el de disco solo: sin "default" lanza InvalidStorageError
+        # al primer archivo (el 500 del panel, 05-10-2026). Hay que declararlo.
+        self.assertEqual(s.STORAGES['default']['BACKEND'],
+                         'django.core.files.storage.FileSystemStorage')
         self.assertIn('staticfiles', s.STORAGES)
 
     def test_el_endpoint_se_arma_con_el_account_id(self):

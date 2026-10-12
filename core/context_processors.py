@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
-from .models import Promocion
+from .models import AGENDA_URL, Promocion
 
 
 def promocion_activa(request):
@@ -13,4 +13,5 @@ def promocion_activa(request):
         .order_by('-id')
         .first()
     )
-    return {'promo_activa': promo, 'ga4_id': settings.GA4_MEASUREMENT_ID}
+    return {'promo_activa': promo, 'ga4_id': settings.GA4_MEASUREMENT_ID,
+            'agenda_url': AGENDA_URL}

@@ -3,6 +3,11 @@ from urllib.parse import quote
 from django.db import models
 from django.urls import reverse
 
+# Agenda online. UN solo lugar: la usan la portada, /links/, /transformaciones/
+# y el boton por defecto de las promociones. En oct-2026 el salon cambio
+# AgendaPro por esta.
+AGENDA_URL = 'https://salonamanda.synaptechspa.cl'
+
 
 class Producto(models.Model):
     nombre            = models.CharField(max_length=255)
@@ -63,7 +68,7 @@ class Promocion(models.Model):
     imagen      = models.ImageField(upload_to='promociones/', null=True, blank=True,
                                     help_text='Foto de la promo (jpg/png). Opcional.')
     btn_texto   = models.CharField(max_length=60, default='Reservar ahora')
-    btn_url     = models.CharField(max_length=500, default='https://link.agendapro.com/cl/salonamanda/9581b2de')
+    btn_url     = models.CharField(max_length=500, default=AGENDA_URL)
     activa      = models.BooleanField(default=True)
     fecha_fin   = models.DateField(null=True, blank=True, help_text='Dejar vacío = sin vencimiento')
 

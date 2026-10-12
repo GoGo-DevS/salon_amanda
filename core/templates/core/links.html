@@ -151,7 +151,7 @@
 
   <nav class="links">
 
-    <a class="link-btn" href="https://link.agendapro.com/cl/salonamanda/9581b2de" target="_blank" rel="noopener">
+    <a class="link-btn" href="{{ agenda_url }}" target="_blank" rel="noopener">
       <span class="icon icon-agenda">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="4" width="18" height="17" rx="3" stroke="#00BFC8" stroke-width="2"/>
@@ -239,7 +239,9 @@
         [/youtube\.com|youtu\.be/i, 'youtube'],
         [/linkedin\.com/i, 'linkedin'],
         [/mercadolibre\./i, 'mercadolibre'],
-        [/agendapro\./i, 'agendapro'],
+        // El reporte semanal del CRM lee 'agendapro' como "fueron a reservar":
+        // la agenda nueva (oct-2026) conserva la etiqueta para no cortar la serie.
+        [/agendapro\.|synaptechspa\./i, 'agendapro'],
         [/google\.[a-z.]+\/maps|maps\.app\.goo|goo\.gl\/maps|maps\.google/i, 'mapa'],
         [/^mailto:/i, 'correo'],
         [/^tel:/i, 'telefono']

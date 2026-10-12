@@ -30,7 +30,11 @@ R2_PUBLIC_DOMAIN = os.environ.get('R2_PUBLIC_DOMAIN', '')
 # al primer archivo que toque: el sitio entero cae con 502 y el motivo no aparece
 # en ninguna parte. Faltando alguna se cae a Cloudinary o a disco, que es
 # degradarse y no morir.
-USAR_R2 = bool(R2_BUCKET_NAME and R2_ACCOUNT_ID and R2_ACCESS_KEY_ID and R2_SECRET_ACCESS_KEY)
+#
+# Y R2_PUBLIC_DOMAIN tambien: sin ella las URLs salen apuntando al endpoint
+# PRIVADO del bucket y todas las fotos quedan rotas (regla 12: TODAS).
+USAR_R2 = bool(R2_BUCKET_NAME and R2_ACCOUNT_ID and R2_ACCESS_KEY_ID
+               and R2_SECRET_ACCESS_KEY and R2_PUBLIC_DOMAIN)
 
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL', '')
 
@@ -144,6 +148,13 @@ if USAR_R2:
 elif CLOUDINARY_URL:
     _storages["default"] = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    }
+else:
+    # Hay que declararlo: con STORAGES definido a mano y sin "default", Django NO
+    # cae al disco solo, lanza InvalidStorageError al primer archivo. Ese era el
+    # Server Error 500 al subir la foto de una promo (05-10-2026).
+    _storages["default"] = {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     }
 STORAGES = _storages
 
