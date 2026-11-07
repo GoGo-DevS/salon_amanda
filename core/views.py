@@ -274,15 +274,27 @@ def profesionales(request):
         {
             # Fabiola ya no trabaja en el salón (Sergio, WhatsApp 15-09-2026).
             # Entra Evelyn Inglés: "los mismos servicios que Paola y además los
-            # que realiza Angela". Su foto de perfil es el logo del salón hasta
-            # que Sergio mande una suya: basta reemplazar evelyn-perfil.jpg.
+            # que realiza Angela". Sus trabajos llegaron el 06-11-2026.
             'slug': 'evelyn',
             'nombre': 'Evelyn Inglés',
             'titulo': 'Colorista, Nail Art & Lash Lifting',
             'directora': False,
             'descripcion': 'Coloración, técnica avanzada de color, decoloración, alisados y tratamientos capilares. Además esmaltado Semi-Permanente, extensión con soft gel, nivelación y Lash Lifting tradicional y técnica coreana.',
             'certificaciones': [],
-            'fotos': [],
+            'fotos': [f'img/profesionales/evelyn/evelyn-{i:02d}.webp' for i in range(1, 5)],
+        },
+        {
+            # Entra Valeria Cabrera (Sergio, WhatsApp 06-11-2026), con su
+            # descripción y cuatro trabajos. Todavía sin foto de perfil:
+            # `tiene_foto` la muestra con su inicial hasta que llegue
+            # valeria-perfil.jpg (y en home.html se cambia el avatar por <img>).
+            'slug': 'valeria',
+            'nombre': 'Valeria Cabrera',
+            'titulo': 'Estilista & Lashista',
+            'directora': False,
+            'descripcion': 'Especialista en color, decoloraciones, cortes, tratamientos capilares y alisados. Experta en extensión de pestañas, diseño de miradas y lifting coreano.',
+            'certificaciones': [],
+            'fotos': [f'img/profesionales/valeria/valeria-{i:02d}.webp' for i in range(1, 5)],
         },
     ]
     for persona in equipo:
