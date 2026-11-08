@@ -294,10 +294,26 @@ def profesionales(request):
             'directora': False,
             'descripcion': 'Especialista en color, decoloraciones, cortes, tratamientos capilares y alisados. Experta en extensión de pestañas, diseño de miradas y lifting coreano.',
             'certificaciones': [],
-            'fotos': [f'img/profesionales/valeria/valeria-{i:02d}.webp' for i in range(1, 5)],
+            # Sergio, 07-11-2026: las de pestañas "que aparezcan sobre las de
+            # pelo". Por eso va en grupos, cada uno en su fila.
+            'grupos': [
+                {'titulo': 'Pestañas',
+                 'fotos': [f'img/profesionales/valeria/valeria-pestanas-{i:02d}.webp' for i in range(1, 5)]},
+                {'titulo': 'Cabello',
+                 'fotos': [f'img/profesionales/valeria/valeria-{i:02d}.webp' for i in range(1, 5)]},
+            ],
         },
     ]
     for persona in equipo:
         persona['tiene_foto'] = bool(
             finders.find(f"img/profesionales/{persona['slug']}-perfil.jpg"))
+        # La plantilla solo recorre grupos (una fila de hasta 6 fotos cada
+        # uno). Quien no los declara queda con un grupo sin título, como
+        # antes; `fotos` siempre es la lista completa.
+        if 'grupos' not in persona:
+            fotos = persona.get('fotos', [])
+            persona['grupos'] = [{'titulo': '', 'fotos': fotos}] if fotos else []
+        for grupo in persona['grupos']:
+            grupo['fotos'] = grupo['fotos'][:6]
+        persona['fotos'] = [f for g in persona['grupos'] for f in g['fotos']]
     return render(request, 'core/profesionales.html', {'equipo': equipo})

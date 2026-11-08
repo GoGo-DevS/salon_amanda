@@ -162,6 +162,16 @@
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
+/* Título de cada fila cuando la galería va por grupos (Pestañas, Cabello). */
+.prof-gallery-sub {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+}
 .prof-gallery {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -271,17 +281,20 @@
         </div>
       </div>
 
-      {% if p.fotos %}
+      {% if p.grupos %}
       <div class="row mt-4">
         <div class="col-12">
           <p class="prof-gallery-heading">Trabajos realizados</p>
-          <div class="prof-gallery reveal">
-            {% for foto in p.fotos|slice:":6" %}
+          {% for g in p.grupos %}
+          {% if g.titulo %}<p class="prof-gallery-sub">{{ g.titulo }}</p>{% endif %}
+          <div class="prof-gallery reveal{% if not forloop.last %} mb-4{% endif %}">
+            {% for foto in g.fotos %}
             <div class="prof-gallery-item" onclick="openLb('{% static foto %}')">
-              <img src="{% static foto %}" alt="Trabajo de {{ p.nombre }}" loading="lazy">
+              <img src="{% static foto %}" alt="{% if g.titulo %}{{ g.titulo }}: trabajo{% else %}Trabajo{% endif %} de {{ p.nombre }}" loading="lazy">
             </div>
             {% endfor %}
           </div>
+          {% endfor %}
         </div>
       </div>
       {% endif %}
